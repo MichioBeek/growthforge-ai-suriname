@@ -116,33 +116,30 @@ export default function Voorwaarden() {
             </p>
           </Section>
 
-          {/* 3. Proefperiode en terugbetaling */}
-          <Section number={3} title="Proefperiode en terugbetaling">
+          {/* 3. Geld-terug-garantie */}
+          <Section number={3} title="Geld-terug-garantie">
             <ul className="list-disc space-y-3 pl-5 marker:text-ion">
               <li>
-                Wij kunnen voor in aanmerking komende Diensten een{' '}
-                <Bold>gratis proefperiode van 14 dagen</Bold> aanbieden. Besluit u tijdens de
-                proefperiode dat de Dienst niet bij u past, dan kunt u opzeggen en, indien u
-                kosten in rekening zijn gebracht,{' '}
-                <Bold>terugbetaling verzoeken van de voor die proefperiode betaalde bedragen</Bold>
-                .
+                Bij de start van de Diensten worden het overeengekomen{' '}
+                <Bold>installatiebedrag en de eerste abonnementsperiode vooraf</Bold> bij u in
+                rekening gebracht. Dit is geen gratis proefperiode.
               </li>
               <li>
-                Na de proefperiode zijn abonnementskosten{' '}
+                Bent u niet tevreden, dan kunt u binnen{' '}
+                <Bold>14 dagen na de installatie/start van de Dienst</Bold> contact met ons
+                opnemen om een{' '}
+                <Bold>volledige terugbetaling van de betaalde bedragen</Bold> te verzoeken. Wij
+                betalen dan het volledige bedrag aan u terug.
+              </li>
+              <li>
+                Na deze periode van 14 dagen zijn de betaalde bedragen{' '}
                 <Bold>niet-restitueerbaar, behalve waar de wet dit vereist</Bold> of schriftelijk
-                uitdrukkelijk anders is overeengekomen. Opzeggen stopt toekomstige kosten, maar
-                geeft geen recht op terugbetaling van reeds verschuldigde kosten voor de lopende
-                periode.
-              </li>
-              <li>
-                Installatiekosten dekken uitgevoerd werk en zijn niet-restitueerbaar zodra de
-                installatie is begonnen, behalve tijdens de proefperiode zoals hierboven
-                beschreven.
+                uitdrukkelijk anders is overeengekomen.
               </li>
             </ul>
             <p>
-              Wij behouden ons het recht voor om proefperiodes te beperken of in te trekken, of te
-              weigeren wanneer wij redelijkerwijs misbruik vermoeden.
+              Wij behouden ons het recht voor om deze garantie te beperken of te weigeren wanneer
+              wij redelijkerwijs misbruik vermoeden.
             </p>
           </Section>
 

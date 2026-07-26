@@ -8,9 +8,9 @@ gsap.registerPlugin(ScrollTrigger)
 const TRUST_POINTS = [
   {
     icon: ShieldCheck,
-    title: '14 dagen gratis proberen',
+    title: '14 dagen geld-terug-garantie',
     description:
-      'Geen risico. Bevalt het niet binnen de proefperiode? Volledige terugbetaling, geen gedoe.',
+      'Geen risico. Niet tevreden binnen 14 dagen na installatie? Volledige terugbetaling, geen gedoe.',
   },
   {
     icon: RotateCcw,
@@ -113,8 +113,8 @@ export default function Trust() {
           <p className="relative mt-4 font-poppins text-xl font-semibold leading-relaxed text-ice md:text-2xl">
             Ik zag het van dichtbij: hardwerkende ondernemers die omzet verliezen aan één gemiste
             oproep of een klant die nooit meer iets hoorde. Daarvoor heb ik GrowthForge AI gebouwd.
-            En omdat ik weet dat het werkt, start elke installatie met een gratis proefperiode — u
-            betaalt pas als het resultaat oplevert.
+            En omdat ik weet dat het werkt, geef ik op elke installatie een geld-terug-garantie:
+            bevalt het niet binnen 14 dagen, dan krijgt u het volledige bedrag terug.
           </p>
 
           <div className="relative mt-8 flex items-center gap-3">
