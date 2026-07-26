@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: #080b14;
+  color: #eaf2fb;
+  font-family: 'Sora', sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ---------- Neural Chrome shared utilities ---------- */
+
+/* Inline feTurbulence noise overlay, applied as a fixed full-viewport layer */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+}
+
+/* Faint circuit / grid line pattern, low opacity, for tech texture behind sections */
+.circuit-grid {
+  background-image:
+    linear-gradient(rgba(203, 213, 225, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(203, 213, 225, 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Soft Ion Cyan glow, for interactive/accent elements only — never behind body text */
+.glow-ion {
+  box-shadow: 0 0 20px rgba(61, 231, 222, 0.35);
+}
+.glow-ion-lg {
+  box-shadow: 0 0 40px rgba(61, 231, 222, 0.45);
+}
+
+/* Magnetic button base: scale + glow intensify on hover, color-wipe span inside.
+   Deliberately doesn't declare `position` here — it needs SOME non-static
+   position for .btn-wipe to anchor to, but forcing `relative` here silently
+   wins the cascade over Tailwind's `.absolute` (same specificity, later in
+   source order), breaking any button that needs to be absolutely positioned
+   (e.g. the AI Telefoniste card's "Boek" button). Every usage instead adds
+   its own `relative` or `absolute` utility class explicitly. */
+.btn-magnetic {
+  overflow: hidden;
+  transition:
+    transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.btn-magnetic:hover {
+  transform: scale(1.03);
+}
+.btn-magnetic .btn-wipe {
+  position: absolute;
+  inset: 0;
+  background: #3de7de;
+  transform: translateX(-101%);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 0;
+}
+.btn-magnetic:hover .btn-wipe {
+  transform: translateX(0);
+}
+.btn-magnetic .btn-label {
+  position: relative;
+  z-index: 1;
+}
+
+/* Link/interactive lift on hover */
+.link-lift {
+  display: inline-block;
+  transition:
+    transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    color 0.25s ease;
+}
+.link-lift:hover {
+  transform: translateY(-1px);
+  color: #3de7de;
+}
+
+/* Mono label utility: enforces legibility rule tracking + weight */
+.mono-label {
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+}
+
+::selection {
+  background: rgba(61, 231, 222, 0.3);
+  color: #eaf2fb;
+}
