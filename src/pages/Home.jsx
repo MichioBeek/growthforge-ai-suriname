@@ -5,6 +5,7 @@ import Features from '../components/Features.jsx'
 import Philosophy from '../components/Philosophy.jsx'
 import Protocol from '../components/Protocol.jsx'
 import Trust from '../components/Trust.jsx'
+import ChatDemo from '../components/ChatDemo.jsx'
 import Reviews from '../components/Reviews.jsx'
 import SlotCTA from '../components/SlotCTA.jsx'
 import BookingSection from '../components/BookingSection.jsx'
@@ -20,6 +21,7 @@ export default function Home() {
       <Philosophy />
       <Protocol />
       <Trust />
+      <ChatDemo />
       <Reviews />
       <SlotCTA />
       <BookingSection />
