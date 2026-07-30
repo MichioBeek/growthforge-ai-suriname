@@ -1,12 +1,20 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import gsap from 'gsap'
+import { Star } from 'lucide-react'
 import { DEMO_URL } from '../constants.js'
+import { REVIEWS } from '../data/reviews.js'
+import GoogleLogo from './GoogleLogo.jsx'
 
 const HERO_IMAGE =
   'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1920&auto=format&fit=crop'
 
 export default function Hero() {
   const rootRef = useRef(null)
+
+  const averageRating = useMemo(() => {
+    if (!REVIEWS.length) return null
+    return REVIEWS.reduce((sum, r) => sum + r.rating, 0) / REVIEWS.length
+  }, [])
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -74,7 +82,7 @@ export default function Hero() {
             binnenhalen en oude klanten terugbrengen — dag en nacht, volautomatisch.
           </p>
 
-          <div className="hero-line">
+          <div className="hero-line flex flex-wrap items-center gap-4">
             <a href={DEMO_URL} className="inline-block">
               <button
                 type="button"
@@ -85,6 +93,28 @@ export default function Hero() {
                   Plan een gratis demo
                 </span>
               </button>
+            </a>
+
+            <a href="#reviews" className="btn-magnetic group relative inline-flex items-center gap-3 rounded-full border border-platinum/30 bg-carbon/70 py-3 pl-4 pr-5 backdrop-blur-sm transition-colors duration-300 hover:border-ion/60 hover:shadow-ion-glow md:py-3.5 md:pl-5 md:pr-6">
+              <GoogleLogo className="h-6 w-6 shrink-0 transition-transform duration-300 group-hover:scale-110" />
+              <span className="flex flex-col items-start leading-none">
+                <span className="flex items-center gap-0.5">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      className={`h-3 w-3 md:h-3.5 md:w-3.5 ${
+                        averageRating !== null && i < Math.round(averageRating)
+                          ? 'fill-ion text-ion'
+                          : 'fill-transparent text-platinum/25'
+                      }`}
+                      strokeWidth={1.5}
+                    />
+                  ))}
+                </span>
+                <span className="mt-1.5 font-sora text-[13px] font-semibold text-ice whitespace-nowrap md:text-[14px]">
+                  {averageRating !== null ? `${averageRating.toFixed(1)} · Zie reviews` : 'Zie klantervaringen'}
+                </span>
+              </span>
             </a>
           </div>
         </div>
