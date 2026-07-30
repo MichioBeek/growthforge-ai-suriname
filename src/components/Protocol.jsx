@@ -145,21 +145,25 @@ export default function Protocol() {
         onUpdate: (self) => {
           const progress = self.progress * (steps - 1)
 
-          // Slide each card (after the first) up into place as its turn comes.
           cards.forEach((card, i) => {
-            if (i === 0) return
-            const local = gsap.utils.clamp(0, 1, progress - (i - 1))
-            gsap.set(card, { yPercent: 100 - 100 * local })
-          })
+            // Slide each card (after the first) up into place as its turn comes.
+            const local = i === 0 ? 1 : gsap.utils.clamp(0, 1, progress - (i - 1))
+            if (i > 0) gsap.set(card, { yPercent: 100 - 100 * local })
 
-          // Bury each card (except the last) as the next one arrives on top.
-          cards.forEach((card, i) => {
-            if (i === steps - 1) return
-            const localNext = gsap.utils.clamp(0, 1, progress - i)
-            gsap.set(card, {
-              scale: 1 - 0.1 * localNext,
-              opacity: 1 - 0.5 * localNext,
-            })
+            // Bury each card (except the last) as the next one arrives on top.
+            const localNext = i === steps - 1 ? 0 : gsap.utils.clamp(0, 1, progress - i)
+            if (i < steps - 1) {
+              gsap.set(card, {
+                scale: 1 - 0.1 * localNext,
+                opacity: 1 - 0.5 * localNext,
+              })
+            }
+
+            // A card that hasn't arrived yet or is fully buried behind the next
+            // one is invisible — its decorative motif (spinning circles, scan
+            // line, EKG dash) has no reason to keep animating and repainting
+            // while off-stage, competing with the active card for frame budget.
+            card.classList.toggle('gf-frozen', local <= 0 || localNext >= 1)
           })
         },
       })
@@ -194,6 +198,10 @@ export default function Protocol() {
           from { stroke-dashoffset: 1460; }
           to { stroke-dashoffset: -1460; }
         }
+
+        /* Applied to an off-stage card (not yet arrived, or fully buried) so
+           its motif stops animating/repainting while it can't be seen. */
+        .gf-frozen, .gf-frozen * { animation-play-state: paused !important; }
       `}</style>
 
       <div ref={containerRef} className="relative h-screen w-full overflow-hidden">
