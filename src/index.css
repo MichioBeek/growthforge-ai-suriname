@@ -28,7 +28,11 @@ body {
 
 /* ---------- Neural Chrome shared utilities ---------- */
 
-/* Inline feTurbulence noise overlay, applied as a fixed full-viewport layer */
+/* Inline feTurbulence noise overlay, applied as a fixed full-viewport layer.
+   No mix-blend-mode: blending a fixed full-viewport layer against everything
+   scrolling underneath it forces the compositor to recompute that blend on
+   every frame something beneath it changes, which is a well-known scroll
+   performance cost. Plain low-opacity alpha looks nearly identical at 5%. */
 .noise-overlay {
   position: fixed;
   inset: 0;
@@ -37,7 +41,6 @@ body {
   pointer-events: none;
   z-index: 1;
   opacity: 0.05;
-  mix-blend-mode: overlay;
 }
 
 /* Faint circuit / grid line pattern, low opacity, for tech texture behind sections */

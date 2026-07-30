@@ -134,6 +134,14 @@ export default function Protocol() {
         end: () => `+=${(steps - 1) * window.innerHeight}`,
         pin: true,
         scrub: true,
+        // Only pay the GPU-layer-promotion cost while this section is actually
+        // being scrubbed — keeping it on permanently pins three near-fullscreen
+        // blurred layers in memory for the whole page lifetime and makes
+        // scrolling everywhere else worse, not better.
+        onEnter: () => cards.forEach((card) => { card.style.willChange = 'transform, opacity' }),
+        onEnterBack: () => cards.forEach((card) => { card.style.willChange = 'transform, opacity' }),
+        onLeave: () => cards.forEach((card) => { card.style.willChange = 'auto' }),
+        onLeaveBack: () => cards.forEach((card) => { card.style.willChange = 'auto' }),
         onUpdate: (self) => {
           const progress = self.progress * (steps - 1)
 
