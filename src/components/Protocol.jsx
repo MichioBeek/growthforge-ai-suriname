@@ -133,7 +133,7 @@ export default function Protocol() {
         start: 'top top',
         end: () => `+=${(steps - 1) * window.innerHeight}`,
         pin: true,
-        scrub: true,
+        scrub: 0.3,
         onUpdate: (self) => {
           const progress = self.progress * (steps - 1)
 
@@ -151,7 +151,6 @@ export default function Protocol() {
             gsap.set(card, {
               scale: 1 - 0.1 * localNext,
               opacity: 1 - 0.5 * localNext,
-              filter: `blur(${20 * localNext}px)`,
             })
           })
         },
@@ -197,7 +196,7 @@ export default function Protocol() {
               key={step.number}
               ref={(el) => (cardRefs.current[i] = el)}
               className="absolute inset-3 flex items-center overflow-hidden rounded-[3rem] border border-platinum/10 bg-carbon md:inset-8"
-              style={{ zIndex: 10 + i * 10 }}
+              style={{ zIndex: 10 + i * 10, willChange: 'transform, opacity' }}
             >
               <div className="pointer-events-none absolute left-1/2 top-1/2 h-[28rem] w-[28rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-plasma/10 blur-[110px]" />
 

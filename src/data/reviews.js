@@ -11,4 +11,13 @@
 //   quote: 'Exacte tekst van de review, woord voor woord.',
 //   date: '2026-08-01',            // ISO date the review was posted
 // }
-export const REVIEWS = []
+export const REVIEWS = [
+  {
+    name: 'Rachiano Karijodimedjo',
+    business: 'Rowandie Barbershop',
+    rating: 5,
+    quote:
+      'Heel goede website. Wat ik vooral mooi vind, is dat je eerst alle informatie kunt lezen en het werk kunt bekijken voordat je een afspraak maakt. Zo krijg je een goed beeld van de persoon en de diensten. Zeker een aanrader. Keep up the good work. \u{1F44C}',
+    date: '2026-07-29',
+  },
+]
