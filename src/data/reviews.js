@@ -20,4 +20,11 @@ export const REVIEWS = [
       'Heel goede website. Wat ik vooral mooi vind, is dat je eerst alle informatie kunt lezen en het werk kunt bekijken voordat je een afspraak maakt. Zo krijg je een goed beeld van de persoon en de diensten. Zeker een aanrader. Keep up the good work. \u{1F44C}',
     date: '2026-07-29',
   },
+  {
+    name: 'Raimil George',
+    business: 'R Flow Plumbing Solutions',
+    rating: 5,
+    quote: 'Ik ben zeer tevreden over de service. Snel en professioneel \u{1F4AF}.',
+    date: '2026-08-02',
+  },
 ]
