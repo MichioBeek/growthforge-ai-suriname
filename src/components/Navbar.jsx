@@ -1,80 +1,72 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { ChevronUp } from 'lucide-react'
 import { DEMO_URL } from '../constants.js'
 import Logo from './Logo.jsx'
+import './Navbar.css'
+
+const DRAWER_LINKS = [
+  { label: 'Diensten', href: '#diensten' },
+  { label: 'Werkwijze', href: '#werkwijze' },
+  { label: 'Demo', href: '#demo' },
+  { label: 'Reviews', href: '#reviews' },
+  { label: 'Contact', href: '#contact' },
+]
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
-  const navRef = useRef(null)
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    const heroEl = document.getElementById('hero')
-    if (!heroEl) return undefined
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [open])
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Once the hero's top edge has scrolled past the viewport top,
-        // boundingClientRect.top goes negative — that's the cue to morph
-        // the pill into its "scrolled" chrome state.
-        setScrolled(entry.boundingClientRect.top < -10)
-      },
-      { threshold: 0, rootMargin: '-1px 0px 0px 0px' }
-    )
-
-    observer.observe(heroEl)
-    return () => observer.disconnect()
-  }, [])
-
-  const navLinks = [
-    { label: 'Diensten', href: '#diensten' },
-    { label: 'Werkwijze', href: '#werkwijze' },
-    { label: 'Contact', href: '#contact' },
-  ]
+  useEffect(() => {
+    if (!open) return undefined
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [open])
 
   return (
-    <header
-      ref={navRef}
-      className={[
-        'fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1.5rem)] max-w-3xl',
-        'rounded-full transition-all duration-[350ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] border',
-        scrolled
-          ? 'bg-void/60 backdrop-blur-xl border-platinum/20 shadow-ion-glow'
-          : 'bg-transparent backdrop-blur-0 border-transparent',
-      ].join(' ')}
-    >
-      <nav className="flex items-center justify-between gap-4 px-4 py-3 md:px-6 md:py-3.5">
-        <a
-          href="#hero"
-          className="flex items-center gap-2.5 font-sora font-semibold text-ice text-[15px] md:text-base tracking-[-0.02em] whitespace-nowrap"
-        >
-          <Logo className="h-7 w-7 md:h-8 md:w-8 rounded-[12px] shadow-ion-glow" />
-          GrowthForge AI
-        </a>
+    <>
+      <header className="nav2-header">
+        <div className="nav2-inner">
+          <a href="#hero" className="nav2-logo" onClick={() => setOpen(false)}>
+            <Logo className="nav2-logo-icon h-8 w-8" />
+            GrowthForge AI
+          </a>
 
-        <ul className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className="link-lift text-platinum text-[15px] font-medium opacity-95"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        <a href={DEMO_URL}>
           <button
             type="button"
-            className="btn-magnetic relative glow-ion bg-ion text-void rounded-full px-5 py-2.5 md:px-6 md:py-2.5"
+            className={`nav2-menu-btn${open ? ' is-open' : ''}`}
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
           >
-            <span className="btn-wipe" />
-            <span className="btn-label font-sora font-semibold text-[14px] md:text-[15px] whitespace-nowrap">
-              Gratis demo
-            </span>
+            {open ? 'Sluiten' : 'Menu'}
+            <ChevronUp size={16} />
           </button>
-        </a>
-      </nav>
-    </header>
+        </div>
+      </header>
+
+      <div className={`nav2-drawer${open ? ' is-open' : ''}`}>
+        <nav className="nav2-drawer-links">
+          {DRAWER_LINKS.map((link) => (
+            <a key={link.href} href={link.href} onClick={() => setOpen(false)}>
+              {link.label}
+            </a>
+          ))}
+          <a href={DEMO_URL} onClick={() => setOpen(false)}>
+            Plan een demo
+          </a>
+        </nav>
+        <div className="nav2-drawer-footer">
+          © {new Date().getFullYear()} GrowthForge AI. Alle rechten voorbehouden.
+        </div>
+      </div>
+    </>
   )
 }

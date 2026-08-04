@@ -1,0 +1,140 @@
+/* Deliberately position: absolute, not fixed — the navbar lives inside the
+   hero and scrolls away with it instead of sticking through the whole page. */
+.nav2-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+.nav2-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 19px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav2-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 30px;
+  letter-spacing: -0.08em;
+  color: #0a0a0a;
+  text-decoration: none;
+  text-shadow: 0 1px 12px rgba(255, 255, 255, 0.55);
+}
+
+.nav2-logo-icon {
+  flex-shrink: 0;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(61, 231, 222, 0.35);
+}
+
+.nav2-menu-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #0a0a0a;
+  color: #ffffff;
+  border: none;
+  border-radius: 9999px;
+  padding: 10px 10px 10px 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.nav2-menu-btn svg {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav2-menu-btn.is-open svg {
+  transform: rotate(180deg);
+}
+
+.nav2-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.nav2-drawer.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.nav2-drawer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav2-drawer-links a {
+  font-family: 'Inter', sans-serif;
+  font-size: 48px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  color: #0a0a0a;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.nav2-drawer-links a:hover {
+  opacity: 0.55;
+}
+
+.nav2-drawer-footer {
+  position: absolute;
+  bottom: 40px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6b6b6b;
+}
+
+@media (max-width: 1200px) {
+  .nav2-inner {
+    padding: 19px 32px;
+  }
+
+  .nav2-drawer-links a {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 810px) {
+  .nav2-inner {
+    padding: 16px 20px;
+  }
+
+  .nav2-logo {
+    font-size: 24px;
+    gap: 8px;
+  }
+
+  .nav2-drawer-links {
+    gap: 16px;
+  }
+
+  .nav2-drawer-links a {
+    font-size: 32px;
+  }
+}

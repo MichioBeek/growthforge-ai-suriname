@@ -70,8 +70,8 @@ function DiagnosticShuffler() {
             zIndex: 10 - i,
             transform: `scale(${1 - i * 0.05})`,
             opacity: i === 0 ? 1 : i === 1 ? 0.92 : 0.85,
-            background: i === 0 ? 'rgba(61,231,222,0.1)' : 'rgba(203,213,225,0.05)',
-            borderColor: i === 0 ? 'rgba(61,231,222,0.4)' : 'rgba(203,213,225,0.15)',
+            background: i === 0 ? 'rgba(61,231,222,0.1)' : 'rgba(10,10,10,0.04)',
+            borderColor: i === 0 ? 'rgba(61,231,222,0.4)' : 'rgba(10,10,10,0.12)',
             transitionProperty: 'top, transform, opacity, background, border-color',
             transitionDuration: '0.7s, 0.7s, 0.5s, 0.5s, 0.5s',
             transitionTimingFunction: 'cubic-bezier(0.34,1.56,0.64,1)',
@@ -139,7 +139,7 @@ function TelemetryTypewriter() {
   return (
     <div
       ref={rootRef}
-      className="mt-5 h-48 overflow-hidden rounded-2xl border border-platinum/15 bg-void/40 p-4 md:h-52"
+      className="mt-5 h-48 overflow-hidden rounded-2xl border border-platinum/15 bg-carbon p-4 md:h-52"
     >
       <div className="mb-3 flex items-center gap-2">
         <span className="h-1.5 w-1.5 rounded-full bg-ion animate-pulse" />
@@ -220,7 +220,7 @@ function CursorScheduler() {
       }
 
       gsap.set(cursor, { opacity: 0, left: '2%', top: '4%', scale: 1 })
-      gsap.set(cell, { backgroundColor: 'rgba(203,213,225,0.05)', borderColor: 'rgba(203,213,225,0.18)' })
+      gsap.set(cell, { backgroundColor: 'rgba(10,10,10,0.04)', borderColor: 'rgba(10,10,10,0.14)' })
       gsap.set(button, { scale: 1 })
 
       gsap
@@ -246,7 +246,7 @@ function CursorScheduler() {
         .to(cursor, { scale: 1, duration: 0.18, ease: 'power1.out' })
         .to(button, { scale: 1, duration: 0.2 }, '<')
         .to(cursor, { opacity: 0, duration: 0.4, delay: 0.3 })
-        .set(cell, { backgroundColor: 'rgba(203,213,225,0.05)', borderColor: 'rgba(203,213,225,0.18)' })
+        .set(cell, { backgroundColor: 'rgba(10,10,10,0.04)', borderColor: 'rgba(10,10,10,0.14)' })
     }, rootRef)
 
     return () => ctx.revert()
@@ -264,7 +264,7 @@ function CursorScheduler() {
               cellRefs.current[i] = node
             }}
             className="flex h-9 flex-1 items-center justify-center rounded-lg border font-mono text-[12px] text-ice md:text-[13px]"
-            style={{ borderColor: 'rgba(203,213,225,0.18)', background: 'rgba(203,213,225,0.05)' }}
+            style={{ borderColor: 'rgba(10,10,10,0.14)', background: 'rgba(10,10,10,0.04)' }}
           >
             {label}
           </div>
@@ -352,7 +352,7 @@ function ChatBubbleStream() {
   return (
     <div
       ref={rootRef}
-      className="mt-5 flex h-52 flex-col justify-end gap-2 overflow-hidden rounded-2xl border border-platinum/15 bg-void/40 p-4 md:h-56"
+      className="mt-5 flex h-52 flex-col justify-end gap-2 overflow-hidden rounded-2xl border border-platinum/15 bg-carbon p-4 md:h-56"
     >
       <div
         className={`ml-auto max-w-[80%] rounded-2xl rounded-br-sm bg-platinum/10 px-3 py-2 text-[13px] text-ice transition-all duration-500 ${
@@ -445,7 +445,7 @@ function WireframeAssembler() {
   return (
     <div
       ref={rootRef}
-      className="overflow-hidden rounded-2xl border border-platinum/15 bg-void/40"
+      className="overflow-hidden rounded-2xl border border-platinum/15 bg-carbon"
     >
       <div className="flex items-center gap-1.5 border-b border-platinum/10 px-4 py-3">
         <span className="h-2.5 w-2.5 rounded-full bg-platinum/25" />
@@ -463,7 +463,7 @@ function WireframeAssembler() {
             style={{
               width: i < builtCount ? block.width : '0%',
               background:
-                i === builtCount - 1 ? 'rgba(61,231,222,0.55)' : 'rgba(203,213,225,0.18)',
+                i === builtCount - 1 ? 'rgba(61,231,222,0.55)' : 'rgba(10,10,10,0.15)',
             }}
           />
         ))}

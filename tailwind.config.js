@@ -4,12 +4,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        void: '#080B14',
+        void: '#FFFFFF',
         ion: '#3DE7DE',
         plasma: '#7C6BFF',
-        platinum: '#CBD5E1',
-        ice: '#EAF2FB',
-        carbon: '#12161F',
+        platinum: '#6B6B6B',
+        ice: '#0A0A0A',
+        carbon: '#F4F4F5',
       },
       fontFamily: {
         sora: ['Sora', 'sans-serif'],

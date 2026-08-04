@@ -55,7 +55,7 @@ export default function SlotCTA() {
 
           <a
             href={DEMO_URL}
-            className="btn-magnetic relative glow-ion mt-10 inline-flex items-center justify-center rounded-full bg-ion px-8 py-4 text-void"
+            className="btn-magnetic relative glow-ion mt-10 inline-flex items-center justify-center rounded-full bg-ion px-8 py-4 text-ice"
           >
             <span className="btn-wipe" />
             <span className="btn-label font-sora text-[15px] font-semibold md:text-base">

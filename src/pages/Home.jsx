@@ -1,6 +1,7 @@
 import NoiseOverlay from '../components/NoiseOverlay.jsx'
 import Navbar from '../components/Navbar.jsx'
 import Hero from '../components/Hero.jsx'
+import TrustedBy from '../components/TrustedBy.jsx'
 import Features from '../components/Features.jsx'
 import Philosophy from '../components/Philosophy.jsx'
 import Protocol from '../components/Protocol.jsx'
@@ -17,6 +18,7 @@ export default function Home() {
       <NoiseOverlay />
       <Navbar />
       <Hero />
+      <TrustedBy />
       <Features />
       <Philosophy />
       <Protocol />

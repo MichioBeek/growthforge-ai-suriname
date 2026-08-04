@@ -52,7 +52,7 @@ export default function ChatDemo() {
               src="https://buildmyagent.io/shared/rAfgM5YgGr?embed=true"
               title="GrowthForge AI chatbot demo"
               height="525"
-              style={{ width: '100%', height: '525px', display: 'block', border: 'none', background: '#12161F' }}
+              style={{ width: '100%', height: '525px', display: 'block', border: 'none', background: '#F4F4F5' }}
               allowFullScreen
               loading="lazy"
             />

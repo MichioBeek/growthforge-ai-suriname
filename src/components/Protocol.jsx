@@ -78,10 +78,10 @@ function InstallatieMotif() {
   }
 
   return (
-    <div className="relative h-56 w-56 overflow-hidden rounded-[1.5rem] border border-platinum/10 bg-void/40 md:h-72 md:w-72">
+    <div className="relative h-56 w-56 overflow-hidden rounded-[1.5rem] border border-platinum/10 bg-carbon md:h-72 md:w-72">
       <svg viewBox="0 0 224 224" className="absolute inset-0 h-full w-full" aria-hidden="true">
         {dots.map((d) => (
-          <circle key={`${d.x}-${d.y}`} cx={d.x} cy={d.y} r="1.6" fill="#CBD5E1" fillOpacity="0.35" />
+          <circle key={`${d.x}-${d.y}`} cx={d.x} cy={d.y} r="1.6" fill="#0A0A0A" fillOpacity="0.18" />
         ))}
       </svg>
       <div className="gf-scan absolute inset-x-0 h-[2px] bg-ion shadow-[0_0_14px_4px_rgba(61,231,222,0.55)]" />

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 * {
@@ -16,8 +16,8 @@ html {
 
 body {
   margin: 0;
-  background-color: #080b14;
-  color: #eaf2fb;
+  background-color: #ffffff;
+  color: #0a0a0a;
   font-family: 'Sora', sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -46,8 +46,8 @@ body {
 /* Faint circuit / grid line pattern, low opacity, for tech texture behind sections */
 .circuit-grid {
   background-image:
-    linear-gradient(rgba(203, 213, 225, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(203, 213, 225, 0.06) 1px, transparent 1px);
+    linear-gradient(rgba(10, 10, 10, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10, 10, 10, 0.05) 1px, transparent 1px);
   background-size: 48px 48px;
 }
 
@@ -112,5 +112,5 @@ body {
 
 ::selection {
   background: rgba(61, 231, 222, 0.3);
-  color: #eaf2fb;
+  color: #0a0a0a;
 }

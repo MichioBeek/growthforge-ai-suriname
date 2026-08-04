@@ -112,7 +112,7 @@ export default function BookingSection() {
                 display: 'block',
                 width: '100%',
                 height: 720,
-                backgroundColor: '#12161F',
+                backgroundColor: '#F4F4F5',
                 clipPath: 'inset(28px 0 28px 0)',
               }}
             />
@@ -138,7 +138,7 @@ export default function BookingSection() {
                 href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noreferrer"
-                className="btn-magnetic relative glow-ion mt-2 inline-flex items-center justify-center gap-3 rounded-full bg-ion px-8 py-4 text-void"
+                className="btn-magnetic relative glow-ion mt-2 inline-flex items-center justify-center gap-3 rounded-full bg-ion px-8 py-4 text-ice"
               >
                 <span className="btn-wipe" />
                 <span className="btn-label inline-flex items-center gap-2 font-sora text-[15px] font-semibold md:text-base">
