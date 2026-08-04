@@ -70,4 +70,11 @@
   .tb-label {
     max-width: none;
   }
+
+  /* In column-flex, flex:1/min-width:0 only govern the main (vertical) axis —
+     without an explicit width the marquee shrinks to fit its full unclipped
+     track content instead of the container, blowing out page width. */
+  .tb-marquee {
+    width: 100%;
+  }
 }

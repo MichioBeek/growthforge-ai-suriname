@@ -311,17 +311,6 @@
     padding: 120px 24px 96px;
   }
 
-  .hero3-section::before {
-    transform: rotate(90deg);
-    transform-origin: center;
-    width: 100vh;
-    height: 100vw;
-    top: 50%;
-    left: 50%;
-    margin-top: -50vw;
-    margin-left: -50vh;
-  }
-
   .hero3-lines-side {
     display: none;
   }
@@ -340,7 +329,7 @@
   }
 
   .hero3-btn-primary,
-  .hero3-btn-book {
+  .hero3-btn-review {
     width: 100%;
     max-width: 320px;
     justify-content: center;
