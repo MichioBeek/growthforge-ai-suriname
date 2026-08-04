@@ -4,13 +4,14 @@ import { DEMO_URL } from '../constants.js'
 import Logo from './Logo.jsx'
 import './Navbar.css'
 
-const DRAWER_LINKS = [
+const NAV_LINKS = [
   { label: 'Diensten', href: '#diensten' },
   { label: 'Werkwijze', href: '#werkwijze' },
-  { label: 'Demo', href: '#demo' },
   { label: 'Reviews', href: '#reviews' },
   { label: 'Contact', href: '#contact' },
 ]
+
+const DRAWER_LINKS = [...NAV_LINKS, { label: 'Demo', href: '#demo' }]
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -39,6 +40,14 @@ export default function Navbar() {
             <Logo className="nav2-logo-icon h-8 w-8" />
             GrowthForge AI
           </a>
+
+          <nav className="nav2-links">
+            {NAV_LINKS.map((link) => (
+              <a key={link.href} href={link.href}>
+                {link.label}
+              </a>
+            ))}
+          </nav>
 
           <button
             type="button"

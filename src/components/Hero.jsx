@@ -1,4 +1,7 @@
-import { DEMO_URL } from '../constants.js'
+import { useMemo } from 'react'
+import { Star } from 'lucide-react'
+import GoogleLogo from './GoogleLogo.jsx'
+import { REVIEWS } from '../data/reviews.js'
 import './Hero.css'
 
 const TICKER_ITEMS = [
@@ -13,6 +16,11 @@ const LINE_COUNT = 20
 const LINE_WIDTHS = Array.from({ length: LINE_COUNT }, (_, i) => 60 + i * 10)
 
 export default function Hero() {
+  const averageRating = useMemo(() => {
+    if (!REVIEWS.length) return null
+    return REVIEWS.reduce((sum, r) => sum + r.rating, 0) / REVIEWS.length
+  }, [])
+
   return (
     <section id="hero" className="hero3-section">
       <div className="hero3-lines-side is-left" aria-hidden="true">
@@ -74,13 +82,25 @@ export default function Hero() {
             Bekijk diensten
           </a>
 
-          <a href={DEMO_URL} className="hero3-btn-book">
-            <span className="hero3-btn-book-avatar">GF</span>
+          <a href="#reviews" className="hero3-btn-review">
+            <GoogleLogo className="hero3-btn-review-logo" />
             <span className="hero3-btn-book-text">
-              <span className="hero3-btn-book-primary">Plan een gratis demo</span>
-              <span className="hero3-btn-book-secondary">
-                <span className="hero3-btn-book-dot" />
-                Kies een moment
+              <span className="hero3-btn-review-stars">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star
+                    key={i}
+                    size={12}
+                    strokeWidth={1.5}
+                    className={
+                      averageRating !== null && i < Math.round(averageRating)
+                        ? 'is-filled'
+                        : ''
+                    }
+                  />
+                ))}
+              </span>
+              <span className="hero3-btn-book-primary">
+                {averageRating !== null ? `${averageRating.toFixed(1)} · Zie reviews` : 'Zie klantervaringen'}
               </span>
             </span>
           </a>

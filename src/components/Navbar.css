@@ -38,6 +38,28 @@
   box-shadow: 0 0 20px rgba(61, 231, 222, 0.35);
 }
 
+.nav2-links {
+  display: none;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav2-links a {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #0a0a0a;
+  text-decoration: none;
+  opacity: 0.75;
+  text-shadow: 0 1px 12px rgba(255, 255, 255, 0.55);
+  transition: opacity 0.2s ease;
+}
+
+.nav2-links a:hover {
+  opacity: 1;
+}
+
 .nav2-menu-btn {
   display: inline-flex;
   align-items: center;
@@ -108,6 +130,12 @@
   font-size: 13px;
   font-weight: 500;
   color: #6b6b6b;
+}
+
+@media (min-width: 811px) {
+  .nav2-links {
+    display: flex;
+  }
 }
 
 @media (max-width: 1200px) {
