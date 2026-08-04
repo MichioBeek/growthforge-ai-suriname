@@ -311,6 +311,28 @@
     padding: 120px 24px 96px;
   }
 
+  /* The source image is a flat 1280x724 canvas with soft color glows only at
+     its far left/right edges (sampled directly from the file: cyan #b6f3f5
+     near the top corners, blue #8bc2fb at mid-height, fading to white by
+     about 20% in from each edge — no detail anywhere else). No crop of that
+     fixed-aspect image both keeps the glows AND avoids a hard edge on a
+     narrow portrait screen: cover zooms in past them entirely, contain
+     letterboxes with a visible seam where the image runs out. Recreating
+     the same two glows as CSS gradients sidesteps the aspect-ratio problem
+     completely — they scale to fill the section at any height with a built
+     -in soft fade, so there's nothing to crop and no boundary to seam at. */
+  .hero3-section::before {
+    background-image:
+      radial-gradient(ellipse 60% 30% at 0% 10%, rgba(182, 243, 245, 0.55), transparent 70%),
+      radial-gradient(ellipse 60% 30% at 100% 10%, rgba(177, 243, 244, 0.55), transparent 70%),
+      radial-gradient(ellipse 65% 65% at 0% 55%, rgba(139, 194, 251, 0.5), transparent 68%),
+      radial-gradient(ellipse 65% 65% at 100% 55%, rgba(142, 195, 250, 0.5), transparent 68%);
+    background-color: #ffffff;
+    background-size: 100% 100%;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+  }
+
   .hero3-lines-side {
     display: none;
   }
