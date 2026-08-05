@@ -66,6 +66,14 @@ export default function Reviews() {
     return REVIEWS.reduce((sum, r) => sum + r.rating, 0) / REVIEWS.length
   }, [])
 
+  // Highest-rated reviews lead, newest breaks ties — keeps the strongest
+  // social proof up front regardless of the order reviews are added in reviews.js.
+  const sortedReviews = useMemo(
+    () =>
+      [...REVIEWS].sort((a, b) => b.rating - a.rating || new Date(b.date) - new Date(a.date)),
+    [],
+  )
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       const cards = gridRef.current?.querySelectorAll('.review-card')
@@ -118,7 +126,7 @@ export default function Reviews() {
           {REVIEWS.length === 0 ? (
             <EmptyState />
           ) : (
-            REVIEWS.map((review) => <ReviewCard key={`${review.name}-${review.date}`} review={review} />)
+            sortedReviews.map((review) => <ReviewCard key={`${review.name}-${review.date}`} review={review} />)
           )}
         </div>
       </div>
