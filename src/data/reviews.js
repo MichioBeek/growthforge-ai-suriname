@@ -35,4 +35,12 @@ export const REVIEWS = [
       'Vanaf het eerste contact had ik een goed gevoel. Ik werd professioneel geholpen en serieus genomen. Er werd aandacht besteed aan mijn wensen en ik ben tevreden met het eindresultaat. Bedankt voor de fijne samenwerking en de uitstekende service. Ik kan dit bedrijf zeker aanbevelen.',
     date: '2026-08-05',
   },
+  {
+    name: 'Gesje',
+    business: 'OGPictures',
+    rating: 5,
+    quote:
+      'Ik ben super tevreden met de website die Growth Forge AI voor OGPictures heeft gemaakt. Het ontwerp ziet er modern, professioneel en strak uit. Alles werkt soepel en er is goed geluisterd naar mijn wensen. De communicatie was prettig en het eindresultaat heeft mijn verwachtingen overtroffen.',
+    date: '2026-08-05',
+  },
 ]
