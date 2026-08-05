@@ -27,4 +27,12 @@ export const REVIEWS = [
     quote: 'Ik ben zeer tevreden over de service. Snel en professioneel \u{1F4AF}.',
     date: '2026-08-02',
   },
+  {
+    name: 'Dvon',
+    business: 'Reminisce Photography',
+    rating: 4,
+    quote:
+      'Vanaf het eerste contact had ik een goed gevoel. Ik werd professioneel geholpen en serieus genomen. Er werd aandacht besteed aan mijn wensen en ik ben tevreden met het eindresultaat. Bedankt voor de fijne samenwerking en de uitstekende service. Ik kan dit bedrijf zeker aanbevelen.',
+    date: '2026-08-05',
+  },
 ]
