@@ -43,4 +43,12 @@ export const REVIEWS = [
       'Ik ben super tevreden met de website die Growth Forge AI voor OGPictures heeft gemaakt. Het ontwerp ziet er modern, professioneel en strak uit. Alles werkt soepel en er is goed geluisterd naar mijn wensen. De communicatie was prettig en het eindresultaat heeft mijn verwachtingen overtroffen.',
     date: '2026-08-05',
   },
+  {
+    name: 'Shervin Jagroep',
+    business: 'SJ Photography',
+    rating: 5,
+    quote:
+      'Mijn ervaring met Growth Forge AI is vanaf het begin uitstekend geweest. Wat mij direct opviel, was de professionele aanpak en de heldere communicatie. Er werd goed geluisterd naar mijn wensen en actief meegedacht om een website te ontwikkelen die perfect aansluit bij mijn bedrijf. Het hele proces verliep soepel en iedere stap werd duidelijk uitgelegd. Het eindresultaat is een moderne, snelle en gebruiksvriendelijke website die niet alleen professioneel oogt, maar ook vertrouwen uitstraalt. Daarnaast stond het team altijd open voor feedback en werden aanpassingen snel en zorgvuldig doorgevoerd. Wat Growth Forge AI onderscheidt, is de combinatie van technische kennis, creativiteit en een klantgerichte aanpak. Je merkt dat kwaliteit voorop staat en dat ze pas tevreden zijn wanneer jij dat ook bent. Ik kan Growth Forge AI dan ook van harte aanbevelen aan iedereen die op zoek is naar een betrouwbare partner voor een professionele website of digitale oplossing. Een samenwerking waar je met vertrouwen aan kunt beginnen.',
+    date: '2026-08-07',
+  },
 ]
