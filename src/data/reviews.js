@@ -51,4 +51,11 @@ export const REVIEWS = [
       'Mijn ervaring met Growth Forge AI is vanaf het begin uitstekend geweest. Wat mij direct opviel, was de professionele aanpak en de heldere communicatie. Er werd goed geluisterd naar mijn wensen en actief meegedacht om een website te ontwikkelen die perfect aansluit bij mijn bedrijf. Het hele proces verliep soepel en iedere stap werd duidelijk uitgelegd. Het eindresultaat is een moderne, snelle en gebruiksvriendelijke website die niet alleen professioneel oogt, maar ook vertrouwen uitstraalt. Daarnaast stond het team altijd open voor feedback en werden aanpassingen snel en zorgvuldig doorgevoerd. Wat Growth Forge AI onderscheidt, is de combinatie van technische kennis, creativiteit en een klantgerichte aanpak. Je merkt dat kwaliteit voorop staat en dat ze pas tevreden zijn wanneer jij dat ook bent. Ik kan Growth Forge AI dan ook van harte aanbevelen aan iedereen die op zoek is naar een betrouwbare partner voor een professionele website of digitale oplossing. Een samenwerking waar je met vertrouwen aan kunt beginnen.',
     date: '2026-08-07',
   },
+  {
+    name: 'Sen Studios',
+    business: 'Sen Studios',
+    rating: 5,
+    quote: 'Very good service. En wist heel goed in te spelen op de "wants and needs" van mijn onderneming',
+    date: '2026-08-10',
+  },
 ]

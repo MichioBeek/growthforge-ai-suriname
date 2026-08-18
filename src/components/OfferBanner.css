@@ -1,0 +1,115 @@
+/* Fixed at the very top of the page, above the (absolutely-positioned) navbar
+   — see Navbar.css, .nav2-header top offset is shifted down to match this
+   bar's height so the two never overlap. */
+.offer-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 110;
+  height: 40px;
+  display: flex;
+  align-items: stretch;
+  background: #0a0a0a;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+.offer-banner-link {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 12px;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.offer-banner-dot {
+  position: relative;
+  display: inline-flex;
+  height: 7px;
+  width: 7px;
+  flex-shrink: 0;
+}
+
+.offer-banner-dot-ping {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: #3de7de;
+  opacity: 0.75;
+  animation: offer-banner-ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.offer-banner-dot-core {
+  position: relative;
+  height: 7px;
+  width: 7px;
+  border-radius: 9999px;
+  background: #3de7de;
+}
+
+@keyframes offer-banner-ping {
+  75%,
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+.offer-banner-text {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #eaf2fb;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.offer-banner-text strong {
+  color: #3de7de;
+  font-weight: 700;
+}
+
+.offer-banner-arrow {
+  flex-shrink: 0;
+  color: #3de7de;
+  font-weight: 600;
+  transition: transform 0.2s ease;
+}
+
+.offer-banner-link:hover .offer-banner-arrow {
+  transform: translateX(3px);
+}
+
+.offer-banner-close {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  background: transparent;
+  border: none;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(234, 242, 251, 0.5);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.offer-banner-close:hover {
+  color: #eaf2fb;
+}
+
+@media (max-width: 640px) {
+  .offer-banner-text {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 420px) {
+  .offer-banner-arrow {
+    display: none;
+  }
+}

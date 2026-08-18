@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Logo from '../components/Logo.jsx'
 import Footer from '../components/Footer.jsx'
 
-const LAST_UPDATED = '26 juli 2026'
+const LAST_UPDATED = '17 augustus 2026'
 
 function Section({ id, number, title, children }) {
   return (
@@ -21,6 +21,10 @@ function Section({ id, number, title, children }) {
 
 function Bold({ children }) {
   return <strong className="font-semibold text-ice">{children}</strong>
+}
+
+function SubHeading({ children }) {
+  return <p className="font-sora font-semibold text-ice">{children}</p>
 }
 
 export default function Voorwaarden() {
@@ -77,30 +81,39 @@ export default function Voorwaarden() {
 
           {/* 1. De Diensten */}
           <Section number={1} title="De Diensten">
+            <p>GrowthForge AI levert twee soorten diensten aan bedrijven:</p>
+            <div>
+              <SubHeading>a. Website op maat (eenmalig)</SubHeading>
+              <p className="mt-2">
+                Het bouwen en opleveren van een website voor uw bedrijf, tegen een{' '}
+                <Bold>eenmalig, vooraf overeengekomen bedrag</Bold> — bijvoorbeeld de $50
+                introductieprijs of een hoger pakket. Dit is geen abonnement.
+              </p>
+            </div>
+            <div>
+              <SubHeading>b. AI-automatiseringsdiensten (doorlopend)</SubHeading>
+              <ul className="mt-2 list-disc space-y-2 pl-5 marker:text-ion">
+                <li>
+                  <Bold>AI-telefoniste</Bold> — het beantwoorden van gemiste, na-uur- of
+                  overloopoproepen en het inplannen van afspraken;
+                </li>
+                <li>
+                  <Bold>AI-reviewverzoeken</Bold> — geautomatiseerde berichten die klanten
+                  uitnodigen een review achter te laten;
+                </li>
+                <li>
+                  <Bold>AI-reactivatie</Bold> — geautomatiseerde berichten om oude klanten opnieuw
+                  te benaderen;
+                </li>
+                <li>
+                  <Bold>AI-chat</Bold> — geautomatiseerde antwoorden op vragen via de website of
+                  berichtenapps.
+                </li>
+              </ul>
+            </div>
             <p>
-              GrowthForge AI levert AI-automatiseringsdiensten voor bedrijven, waaronder:
-            </p>
-            <ul className="list-disc space-y-2 pl-5 marker:text-ion">
-              <li>
-                <Bold>AI-telefoniste</Bold> — het beantwoorden van gemiste, na-uur- of
-                overloopoproepen en het inplannen van afspraken;
-              </li>
-              <li>
-                <Bold>AI-reviewverzoeken</Bold> — geautomatiseerde berichten die klanten
-                uitnodigen een review achter te laten;
-              </li>
-              <li>
-                <Bold>AI-reactivatie</Bold> — geautomatiseerde berichten om oude klanten opnieuw
-                te benaderen;
-              </li>
-              <li>
-                <Bold>AI-chat</Bold> — geautomatiseerde antwoorden op vragen via de website of
-                berichtenapps.
-              </li>
-            </ul>
-            <p>
-              De specifieke Diensten, omvang en prijs per opdracht worden vóór de installatie met
-              u afgesproken. Wij kunnen functies in de loop van de tijd verbeteren, wijzigen of
+              De specifieke Diensten, omvang en prijs per opdracht worden vóór aanvang met u
+              afgesproken. Wij kunnen functies in de loop van de tijd verbeteren, wijzigen of
               stopzetten; wij geven redelijke voorafgaande kennisgeving van wezenlijke wijzigingen
               die een betaalde Dienst raken.
             </p>
@@ -118,9 +131,14 @@ export default function Voorwaarden() {
 
           {/* 3. Geld-terug-garantie */}
           <Section number={3} title="Geld-terug-garantie">
+            <p>
+              Deze garantie geldt uitsluitend voor de{' '}
+              <Bold>doorlopende AI-automatiseringsdiensten</Bold> (artikel 1b) — niet voor
+              eenmalige websitebouw (artikel 1a), zie artikel 4 daarvoor.
+            </p>
             <ul className="list-disc space-y-3 pl-5 marker:text-ion">
               <li>
-                Bij de start van de Diensten worden het overeengekomen{' '}
+                Bij de start van een AI-automatiseringsdienst worden het overeengekomen{' '}
                 <Bold>installatiebedrag en de eerste abonnementsperiode vooraf</Bold> bij u in
                 rekening gebracht. Dit is geen gratis proefperiode.
               </li>
@@ -145,32 +163,56 @@ export default function Voorwaarden() {
 
           {/* 4. Kosten, facturatie en opzegging */}
           <Section number={4} title="Kosten, facturatie en opzegging">
-            <ul className="list-disc space-y-3 pl-5 marker:text-ion">
-              <li>
-                De Diensten worden geleverd op basis van een{' '}
-                <Bold>installatiebedrag plus een terugkerend abonnement</Bold>, zoals met u
-                overeengekomen.
-              </li>
-              <li>
-                Abonnementskosten worden vooraf en terugkerend gefactureerd totdat wordt
-                opgezegd. Betalingen worden verwerkt door onze externe betaaldienstverlener
-                (bijv. PayPal / Whop); door te betalen gaat u tevens akkoord met de voorwaarden
-                van die dienstverlener.
-              </li>
-              <li>
-                U bent verantwoordelijk voor het geldig houden van uw betaalgegevens. Late of
-                mislukte betaling kan leiden tot opschorting van de Diensten.
-              </li>
-              <li>
-                U kunt <Bold>op elk moment opzeggen</Bold>, met ingang van het einde van uw
-                lopende factuurperiode. Reeds betaalde kosten voor de lopende periode worden niet
-                terugbetaald (met inachtneming van artikel 3).
-              </li>
-              <li>
-                Wij kunnen onze tarieven wijzigen met redelijke voorafgaande kennisgeving;
-                wijzigingen gelden vanaf uw volgende factuurperiode.
-              </li>
-            </ul>
+            <div>
+              <SubHeading>a. Website op maat (eenmalig)</SubHeading>
+              <ul className="mt-2 list-disc space-y-2 pl-5 marker:text-ion">
+                <li>
+                  Het overeengekomen bedrag wordt <Bold>eenmalig, vooraf</Bold> in rekening
+                  gebracht — bijvoorbeeld via bankoverschrijving of contant, zoals met u
+                  afgesproken. Wij starten pas met bouwen zodra de betaling is ontvangen.
+                </li>
+                <li>
+                  Na oplevering is het bedrag <Bold>niet-restitueerbaar</Bold>, behalve waar de
+                  wet dit vereist of schriftelijk uitdrukkelijk anders is overeengekomen. Tijdens
+                  het bouwproces stemmen wij redelijke aanpassingen met u af totdat u akkoord bent
+                  met de oplevering.
+                </li>
+                <li>
+                  Dit is een eenmalige aankoop, geen abonnement — artikel 3 (Geld-terug-garantie)
+                  is hier niet op van toepassing.
+                </li>
+              </ul>
+            </div>
+            <div>
+              <SubHeading>b. AI-automatiseringsdiensten (doorlopend)</SubHeading>
+              <ul className="mt-2 list-disc space-y-2 pl-5 marker:text-ion">
+                <li>
+                  Deze Diensten worden geleverd op basis van een{' '}
+                  <Bold>installatiebedrag plus een terugkerend abonnement</Bold>, zoals met u
+                  overeengekomen.
+                </li>
+                <li>
+                  Abonnementskosten worden vooraf en terugkerend gefactureerd totdat wordt
+                  opgezegd. Betalingen worden verwerkt via bankoverschrijving of onze externe
+                  betaaldienstverlener (bijv. PayPal / Whop), afhankelijk van wat met u is
+                  afgesproken; bij gebruik van een externe betaaldienstverlener gaat u tevens
+                  akkoord met de voorwaarden van die dienstverlener.
+                </li>
+                <li>
+                  U bent verantwoordelijk voor het geldig houden van uw betaalgegevens. Late of
+                  mislukte betaling kan leiden tot opschorting van de Diensten.
+                </li>
+                <li>
+                  U kunt <Bold>op elk moment opzeggen</Bold>, met ingang van het einde van uw
+                  lopende factuurperiode. Reeds betaalde kosten voor de lopende periode worden
+                  niet terugbetaald (met inachtneming van artikel 3).
+                </li>
+                <li>
+                  Wij kunnen onze tarieven wijzigen met redelijke voorafgaande kennisgeving;
+                  wijzigingen gelden vanaf uw volgende factuurperiode.
+                </li>
+              </ul>
+            </div>
           </Section>
 
           {/* 5. Verantwoordelijkheden van de Klant en aanvaardbaar gebruik */}

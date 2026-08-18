@@ -4,7 +4,7 @@ import { ArrowLeft } from 'lucide-react'
 import Logo from '../components/Logo.jsx'
 import Footer from '../components/Footer.jsx'
 
-const LAST_UPDATED = '26 juli 2026'
+const LAST_UPDATED = '17 augustus 2026'
 
 function Section({ title, children }) {
   return (
@@ -281,7 +281,7 @@ export default function Privacy() {
                 <li>AI-agent- en chattools (bijv. buildmyagent.io);</li>
                 <li>Spraak en telefonie;</li>
                 <li>Planning en boeking;</li>
-                <li>Betalingsverwerking (bijv. PayPal / Whop);</li>
+                <li>Betalingsverwerking (bijv. bankoverschrijving, PayPal / Whop);</li>
                 <li>Websiteanalyse en hosting.</li>
               </ul>
               <p>

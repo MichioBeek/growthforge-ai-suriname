@@ -10,12 +10,12 @@ const TRUST_POINTS = [
     icon: ShieldCheck,
     title: '14 dagen geld-terug-garantie',
     description:
-      'Geen risico. Niet tevreden binnen 14 dagen na installatie? Volledige terugbetaling, geen gedoe.',
+      'Geen risico. Niet tevreden binnen 14 dagen na installatie van uw AI-systeem? Volledige terugbetaling, geen gedoe.',
   },
   {
     icon: RotateCcw,
     title: 'Op elk moment opzegbaar',
-    description: 'Geen lange contracten of kleine lettertjes. U zit nergens aan vast.',
+    description: 'Geen lange contracten of kleine lettertjes bij onze AI-abonnementen. U zit nergens aan vast.',
   },
   {
     icon: Lock,

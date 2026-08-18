@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { MousePointer2 } from 'lucide-react'
+import { Phone } from 'lucide-react'
 
 // Defensive registration — App.jsx already registers this globally, but this
 // component must stand on its own if ever rendered/tested in isolation.
@@ -168,125 +168,122 @@ function TelemetryTypewriter() {
 }
 
 /* ------------------------------------------------------------------ */
-/* Card 3 — Cursor Protocol Scheduler → AI Telefoniste                  */
+/* Card 3 — Incoming Call Transcript → AI Telefoniste                   */
 /* ------------------------------------------------------------------ */
 
-const WEEKDAY_LABELS = ['Z', 'M', 'D', 'W', 'D', 'V', 'Z']
-const TARGET_DAY_INDEX = 4 // "Do" — Donderdag
+const CALL_NUMBER = '+597 8 12 34 56'
 
-function CursorScheduler() {
+const CALL_LINES = [
+  { speaker: 'agent', text: 'Goedemiddag, met GrowthForge AI. Waarmee kan ik u helpen?' },
+  { speaker: 'caller', text: 'Kan ik morgen een afspraak inplannen?' },
+  { speaker: 'agent', text: 'Zeker, ik heb morgen 14:00 nog vrij. Zal ik dat voor u boeken?' },
+]
+
+function CallTranscript() {
   const [rootRef, inView] = useInView(0.3)
-  const cursorRef = useRef(null)
-  const buttonRef = useRef(null)
-  const cellRefs = useRef([])
+  // idle -> ringing -> answered (transcript typing) -> booked, then loops
+  const [phase, setPhase] = useState('idle')
+  const [typed, setTyped] = useState([])
 
   useEffect(() => {
-    if (!inView) return undefined
+    if (!inView) {
+      setPhase('idle')
+      setTyped([])
+      return undefined
+    }
 
-    const ctx = gsap.context(() => {
-      const cursor = cursorRef.current
-      const cell = cellRefs.current[TARGET_DAY_INDEX]
-      const button = buttonRef.current
-      const root = rootRef.current
-      if (!cursor || !cell || !button || !root) return
+    let cancelled = false
+    const timeouts = []
+    const after = (fn, ms) => timeouts.push(setTimeout(() => !cancelled && fn(), ms))
 
-      // Measure the REAL rendered positions of the cell and button instead of
-      // guessing percentages against the container box. The container's
-      // height varies by breakpoint (h-44 md:h-48) and the label/grid/button
-      // are normally flowed, not percentage-locked, so hardcoded percentages
-      // drift away from the actual targets. This runs inside a useEffect
-      // (after render/layout/paint) and only once per inView mount, which is
-      // sufficient since layout won't change while the card stays visible.
-      const rootRect = root.getBoundingClientRect()
-      const cellRect = cell.getBoundingClientRect()
-      const buttonRect = button.getBoundingClientRect()
-
-      // MousePointer2's SVG path starts at roughly (4, 4.7) of a 24x24
-      // viewBox — that's the visual "tip" of the pointer. Scaled to the
-      // rendered 20x20 (h-5 w-5) icon, that's ~(3.4, 3.9)px from the icon's
-      // top-left corner. Since the icon is positioned via left/top (which
-      // place its top-left corner, not its tip), subtract that offset so the
-      // tip itself — not the bounding-box corner — lands on the target.
-      const TIP_OFFSET_X = 3.5
-      const TIP_OFFSET_Y = 4
-
-      const cellTarget = {
-        left: cellRect.left - rootRect.left + cellRect.width / 2 - TIP_OFFSET_X,
-        top: cellRect.top - rootRect.top + cellRect.height / 2 - TIP_OFFSET_Y,
+    const typeLine = (lineIndex, charIndex) => {
+      if (cancelled) return
+      if (lineIndex >= CALL_LINES.length) {
+        after(() => setPhase('booked'), 500)
+        after(runLoop, 3600)
+        return
       }
-      const buttonTarget = {
-        left: buttonRect.left - rootRect.left + buttonRect.width / 2 - TIP_OFFSET_X,
-        top: buttonRect.top - rootRect.top + buttonRect.height / 2 - TIP_OFFSET_Y,
-      }
-
-      gsap.set(cursor, { opacity: 0, left: '2%', top: '4%', scale: 1 })
-      gsap.set(cell, { backgroundColor: 'rgba(10,10,10,0.04)', borderColor: 'rgba(10,10,10,0.14)' })
-      gsap.set(button, { scale: 1 })
-
-      gsap
-        .timeline({ repeat: -1, repeatDelay: 1.6 })
-        .to(cursor, { opacity: 1, duration: 0.35, ease: 'power1.out' })
-        .to(cursor, { left: cellTarget.left, top: cellTarget.top, duration: 0.9, ease: 'power2.inOut' })
-        .to(cursor, { scale: 0.85, duration: 0.12, ease: 'power1.in' })
-        .to(
-          cell,
-          { backgroundColor: 'rgba(61,231,222,0.18)', borderColor: 'rgba(61,231,222,0.7)', duration: 0.3 },
-          '<'
-        )
-        .to(cursor, { scale: 1, duration: 0.18, ease: 'power1.out' })
-        .to(cursor, {
-          left: buttonTarget.left,
-          top: buttonTarget.top,
-          duration: 0.8,
-          ease: 'power2.inOut',
-          delay: 0.35,
+      const full = CALL_LINES[lineIndex].text
+      if (charIndex <= full.length) {
+        setTyped((prev) => {
+          const next = [...prev]
+          next[lineIndex] = full.slice(0, charIndex)
+          return next
         })
-        .to(cursor, { scale: 0.85, duration: 0.12, ease: 'power1.in' })
-        .to(button, { scale: 0.96, duration: 0.12 }, '<')
-        .to(cursor, { scale: 1, duration: 0.18, ease: 'power1.out' })
-        .to(button, { scale: 1, duration: 0.2 }, '<')
-        .to(cursor, { opacity: 0, duration: 0.4, delay: 0.3 })
-        .set(cell, { backgroundColor: 'rgba(10,10,10,0.04)', borderColor: 'rgba(10,10,10,0.14)' })
-    }, rootRef)
+        after(() => typeLine(lineIndex, charIndex + 1), 22)
+      } else {
+        after(() => typeLine(lineIndex + 1, 0), 450)
+      }
+    }
 
-    return () => ctx.revert()
-  }, [inView, rootRef])
+    const runLoop = () => {
+      if (cancelled) return
+      setPhase('ringing')
+      setTyped([])
+      after(() => {
+        setPhase('answered')
+        typeLine(0, 0)
+      }, 1200)
+    }
+
+    runLoop()
+
+    return () => {
+      cancelled = true
+      timeouts.forEach(clearTimeout)
+    }
+  }, [inView])
 
   return (
-    <div ref={rootRef} className="relative mt-5 h-44 md:h-48">
-      <p className="mono-label text-[12px] text-platinum opacity-90 md:text-[13px]">Beschikbare tijden</p>
-
-      <div className="mt-3 flex gap-1.5 md:gap-2">
-        {WEEKDAY_LABELS.map((label, i) => (
-          <div
-            key={i}
-            ref={(node) => {
-              cellRefs.current[i] = node
-            }}
-            className="flex h-9 flex-1 items-center justify-center rounded-lg border font-mono text-[12px] text-ice md:text-[13px]"
-            style={{ borderColor: 'rgba(10,10,10,0.14)', background: 'rgba(10,10,10,0.04)' }}
-          >
-            {label}
-          </div>
-        ))}
+    <div
+      ref={rootRef}
+      className="mt-5 flex h-48 flex-col overflow-hidden rounded-2xl border border-platinum/15 bg-carbon p-4 md:h-52"
+    >
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <Phone
+            className={`h-3.5 w-3.5 text-ion ${phase === 'ringing' ? 'animate-bounce' : ''}`}
+            strokeWidth={2.5}
+            aria-hidden="true"
+          />
+          <span className="mono-label text-[12px] uppercase text-ion md:text-[13px]">
+            {phase === 'idle' || phase === 'ringing' ? 'Inkomend gesprek' : 'Opgenomen — 1.4s'}
+          </span>
+        </div>
+        <span className="mono-label text-[11px] text-platinum opacity-70 md:text-[12px]">
+          {CALL_NUMBER}
+        </span>
       </div>
 
-      <button
-        ref={buttonRef}
-        type="button"
-        tabIndex={-1}
-        aria-hidden="true"
-        className="btn-magnetic pointer-events-none absolute left-1/2 top-[80%] -translate-x-1/2 rounded-full border border-ion/50 px-5 py-1.5 text-[12px] text-ion md:text-[13px]"
-      >
-        <span className="btn-wipe" />
-        <span className="btn-label mono-label">Boek</span>
-      </button>
+      <div className="mt-3 flex-1 space-y-2 overflow-hidden font-mono text-[13px] leading-snug">
+        {CALL_LINES.map((line, i) => {
+          const content = typed[i]
+          if (content === undefined) return null
+          const isCurrentLine = i === typed.length - 1 && content.length < line.text.length
+          return (
+            <p
+              key={line.text}
+              className={line.speaker === 'caller' ? 'pl-4 text-platinum opacity-90' : 'text-ice'}
+            >
+              {content}
+              {isCurrentLine && (
+                <span className="ml-0.5 inline-block h-3.5 w-[7px] align-middle bg-ion animate-pulse" />
+              )}
+            </p>
+          )
+        })}
+      </div>
 
-      <MousePointer2
-        ref={cursorRef}
-        strokeWidth={2}
-        className="pointer-events-none absolute left-0 top-0 h-5 w-5 text-ice drop-shadow-[0_0_6px_rgba(61,231,222,0.8)]"
-      />
+      <div
+        className={`mt-2 flex items-center gap-2 rounded-lg bg-ion/10 px-3 py-2 transition-opacity duration-300 ${
+          phase === 'booked' ? 'opacity-100' : 'opacity-0'
+        }`}
+      >
+        <span className="h-1.5 w-1.5 rounded-full bg-ion" aria-hidden="true" />
+        <span className="mono-label text-[11px] text-ion md:text-[12px]">
+          GEBOEKT &middot; MORGEN 14:00
+        </span>
+      </div>
     </div>
   )
 }
@@ -570,7 +567,7 @@ export default function Features() {
             title="AI Telefoniste"
             descriptor="Neemt gemiste en na-uur oproepen aan en boekt de beller direct in."
           >
-            <CursorScheduler />
+            <CallTranscript />
           </FeatureCard>
 
           <FeatureCard

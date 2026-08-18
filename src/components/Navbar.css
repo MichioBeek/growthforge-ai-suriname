@@ -1,8 +1,10 @@
 /* Deliberately position: absolute, not fixed — the navbar lives inside the
-   hero and scrolls away with it instead of sticking through the whole page. */
+   hero and scrolls away with it instead of sticking through the whole page.
+   top: 40px leaves room for the fixed OfferBanner above it (see
+   OfferBanner.css) so the two never overlap. */
 .nav2-header {
   position: absolute;
-  top: 0;
+  top: 40px;
   left: 0;
   right: 0;
   z-index: 100;
