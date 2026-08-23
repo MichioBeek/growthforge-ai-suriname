@@ -4,6 +4,7 @@ const STEPS = [
   { id: 'category', label: 'Bedrijf' },
   { id: 'name', label: 'Naam' },
   { id: 'results', label: 'Pakket' },
+  { id: 'request', label: 'Aanvraag' },
 ]
 
 export default function PakketStepper({ current }) {

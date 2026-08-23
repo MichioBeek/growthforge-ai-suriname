@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Check, Rocket, TrendingUp, Crown, Phone } from 'lucide-react'
 import { PACKAGE_TIERS_BY_CATEGORY } from '../data/packages.js'
-import { buildPakketWhatsAppLink } from '../constants.js'
 
 const TIER_ICONS = {
   starter: Rocket,
@@ -29,7 +28,7 @@ const TIER_ACCENT = {
   groei: {
     icon: 'bg-ion/10 text-ion',
     check: 'text-ion',
-    card: 'border-ion ring-2 ring-ion shadow-ion-glow md:-translate-y-3',
+    card: 'border-ion ring-2 ring-ion shadow-ion-glow lg:-translate-y-3',
     button: 'btn-magnetic relative glow-ion bg-ion text-ice',
     wipe: true,
   },
@@ -43,7 +42,7 @@ const TIER_ACCENT = {
   },
 }
 
-export default function PakketResultaat({ businessName, categoryLabel, category, onTierCtaClick, onPhoneSubmit }) {
+export default function PakketResultaat({ businessName, categoryLabel, category, onSelectTier, onPhoneSubmit }) {
   const tiers = PACKAGE_TIERS_BY_CATEGORY[category]
   const [phone, setPhone] = useState('')
   const [phoneSent, setPhoneSent] = useState(false)
@@ -68,7 +67,11 @@ export default function PakketResultaat({ businessName, categoryLabel, category,
         </p>
       </div>
 
-      <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3 md:items-start">
+      {/* 1 col mobile -> 2 col tablet (sm) -> 3 col only once there's real
+          room for it (lg, matching this section's own max-w-5xl container)
+          — jumping straight from 1 to 3 at md (768px) squeezed 3 full
+          pricing cards into iPad-portrait width. */}
+      <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:items-start">
         {tiers.map((tier, i) => {
           const Icon = TIER_ICONS[tier.id]
           const accent = TIER_ACCENT[tier.id]
@@ -119,18 +122,16 @@ export default function PakketResultaat({ businessName, categoryLabel, category,
               ))}
             </ul>
 
-            <a
-              href={buildPakketWhatsAppLink({ businessName, industryLabel: categoryLabel, tierName: tier.name })}
-              target="_blank"
-              rel="noreferrer"
-              onClick={() => onTierCtaClick(tier)}
+            <button
+              type="button"
+              onClick={() => onSelectTier(tier)}
               className={['mt-8 inline-flex items-center justify-center rounded-full px-6 py-3.5', accent.button].join(' ')}
             >
               {accent.wipe && <span className="btn-wipe" />}
               <span className={accent.wipe ? 'btn-label font-sora text-[14px] font-semibold md:text-[15px]' : 'font-sora text-[14px] font-semibold md:text-[15px]'}>
                 Vraag het {tier.name} pakket aan
               </span>
-            </a>
+            </button>
           </div>
           )
         })}

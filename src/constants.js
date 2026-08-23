@@ -28,38 +28,32 @@ export const WEBSITE_OFFER_WHATSAPP_LINK =
 export const PAKKET_ROUTE = '/'
 export const HOME_ROUTE = '/home'
 
-// Builds a per-tier WhatsApp CTA link for the /pakket quiz results, reusing
-// the same prefilled-message pattern as WEBSITE_OFFER_WHATSAPP_LINK.
-export function buildPakketWhatsAppLink({ businessName, industryLabel, tierName }) {
-  const message =
-    `Hoi Michio, ik heb de pakkettest gedaan voor ${businessName} (${industryLabel}) ` +
-    `en wil graag meer weten over het ${tierName} pakket.`
-  return 'https://wa.me/5977422735?text=' + encodeURIComponent(message)
-}
-
 // Fallback for a visitor on /pakket whose business doesn't fit any category
 // yet — routes straight to WhatsApp instead of a made-up package quote.
 export const PAKKET_OTHER_BUSINESS_WHATSAPP_LINK =
   'https://wa.me/5977422735?text=' +
   encodeURIComponent('Hoi Michio, ik heb de pakkettest gedaan maar mijn type bedrijf stond niet in de lijst — kunnen we praten?')
 
-// Fires alongside the WhatsApp CTA (never replaces it — see project memory
-// on wedge-offer/WhatsApp-first sales) so a quiz completion lands in the
-// "Pakket Quiz Leads" Google Sheet even if the visitor never actually sends
-// the WhatsApp message. Make.com scenario "Pakket Quiz - Lead Capture"
-// (id 6028072) -> Google Sheets addRow, plus (only when `phone` is set) an
-// email to Michio so he can personally reach out on WhatsApp — a bot can't
-// message someone who hasn't messaged first without an approved WhatsApp
-// message template, which this project doesn't have, so this is a manual
-// human follow-up by design, not automation. Fire-and-forget: never throws,
-// never blocks the UI — losing a sheet row is fine, losing the WhatsApp
-// handoff isn't.
+// Captures every meaningful moment in the /pakket flow into the "Pakket
+// Quiz Leads" Google Sheet, even when the visitor never sends a WhatsApp
+// message themselves. Make.com scenario "Pakket Quiz - Lead Capture"
+// (id 6028072) -> Google Sheets addRow, then routes on `stage`:
+//   - 'Bekeken'  (quiz completed, saw pricing) -> row only
+//   - 'Telefoon' (left a number, no tier picked yet) -> row + email to Michio
+//   - 'Aanvraag' (full request form submitted) -> row + email to Michio with
+//     every field + a confirmation email to the lead's own address
+// No automated outbound WhatsApp send anywhere in this: the existing bot
+// can only free-text someone who has already messaged first (no approved
+// WhatsApp message template), so anything past "Telefoon"/"Aanvraag" is a
+// manual, personal follow-up by Michio, by design.
+// Fire-and-forget: never throws, never blocks the UI — losing a sheet row
+// is fine, losing the on-screen confirmation isn't.
 const PAKKET_LEAD_WEBHOOK_URL = 'https://hook.us2.make.com/k2c9cfyqfvxaqrzyxewhghs888x18m8y'
 
-export function capturePakketLead({ businessName, category, stage, tier = '', phone = '' }) {
+export function capturePakketLead(payload) {
   fetch(PAKKET_LEAD_WEBHOOK_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ businessName, category, stage, tier, phone }),
+    body: JSON.stringify(payload),
   }).catch(() => {})
 }

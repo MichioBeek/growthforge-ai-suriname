@@ -14,6 +14,7 @@ import Logo from '../components/Logo.jsx'
 import Footer from '../components/Footer.jsx'
 import NoiseOverlay from '../components/NoiseOverlay.jsx'
 import PakketResultaat from '../components/PakketResultaat.jsx'
+import PakketAanvraagForm from '../components/PakketAanvraagForm.jsx'
 import PakketStepper from '../components/PakketStepper.jsx'
 import { QUIZ_CATEGORIES } from '../data/packages.js'
 import { HOME_ROUTE, PAKKET_OTHER_BUSINESS_WHATSAPP_LINK, capturePakketLead } from '../constants.js'
@@ -35,6 +36,7 @@ export default function Pakket() {
   const [step, setStep] = useState('category')
   const [category, setCategory] = useState(null)
   const [businessName, setBusinessName] = useState('')
+  const [selectedTier, setSelectedTier] = useState(null)
 
   useEffect(() => {
     document.title = 'Vind uw pakket — GrowthForge AI'
@@ -95,7 +97,7 @@ export default function Pakket() {
       <main
         className={[
           'relative flex flex-col items-center px-6 py-16 md:px-12 md:py-24',
-          step === 'results' ? '' : 'min-h-[calc(100vh-88px)] justify-center',
+          step === 'results' || step === 'request' ? '' : 'min-h-[calc(100vh-88px)] justify-center',
         ].join(' ')}
       >
         <PakketStepper current={step} />
@@ -253,14 +255,10 @@ export default function Pakket() {
                   businessName={trimmedName}
                   categoryLabel={category.label}
                   category={category.id}
-                  onTierCtaClick={(tier) => {
-                    trackEvent('pakket_tier_cta_click', { category: category.id, tier: tier.id })
-                    capturePakketLead({
-                      businessName: trimmedName,
-                      category: category.label,
-                      stage: 'Aangevraagd',
-                      tier: tier.name,
-                    })
+                  onSelectTier={(tier) => {
+                    trackEvent('pakket_tier_selected', { category: category.id, tier: tier.id })
+                    setSelectedTier(tier)
+                    setStep('request')
                   }}
                   onPhoneSubmit={(phone) => {
                     trackEvent('pakket_phone_submitted', { category: category.id })
@@ -269,6 +267,37 @@ export default function Pakket() {
                       category: category.label,
                       stage: 'Telefoon',
                       phone,
+                    })
+                  }}
+                />
+              </div>
+            </div>
+          )}
+
+          {step === 'request' && selectedTier && (
+            <div>
+              <button
+                type="button"
+                onClick={() => setStep('results')}
+                className="link-lift inline-flex items-center gap-1.5 text-[14px] font-medium text-platinum opacity-95"
+              >
+                <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+                Vorige
+              </button>
+
+              <div className="mt-8">
+                <PakketAanvraagForm
+                  tier={selectedTier}
+                  businessName={trimmedName}
+                  categoryLabel={category.label}
+                  onSubmit={(formData) => {
+                    trackEvent('pakket_aanvraag_submitted', { category: category.id, tier: selectedTier.id })
+                    capturePakketLead({
+                      businessName: trimmedName,
+                      category: category.label,
+                      stage: 'Aanvraag',
+                      tier: selectedTier.name,
+                      ...formData,
                     })
                   }}
                 />

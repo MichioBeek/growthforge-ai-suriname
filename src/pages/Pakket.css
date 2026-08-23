@@ -163,14 +163,27 @@
   }
 }
 
-@media (max-width: 480px) {
-  .pk-stepper-line {
-    width: 24px;
-    margin: 0 6px;
+@media (max-width: 560px) {
+  .pk-stepper-node {
+    height: 22px;
+    width: 22px;
   }
 
+  .pk-stepper-line {
+    width: 14px;
+    margin: 0 4px;
+  }
+
+  /* 4 nodes + labels no longer fit on a narrow screen — keep only the
+     current step's label visible, same "you are here" info, none of the
+     overflow. */
   .pk-stepper-label {
-    font-size: 9px;
+    display: none;
+  }
+
+  .pk-stepper-item.is-active .pk-stepper-label {
+    display: inline;
     margin-left: 6px;
+    font-size: 10px;
   }
 }
