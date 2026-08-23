@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../components/Logo.jsx'
 import Footer from '../components/Footer.jsx'
+import { HOME_ROUTE } from '../constants.js'
 
 const LAST_UPDATED = '17 augustus 2026'
 
@@ -38,14 +39,14 @@ export default function Voorwaarden() {
       <header className="border-b border-platinum/10 px-6 py-5 md:px-12">
         <div className="mx-auto flex max-w-3xl items-center justify-between gap-4">
           <Link
-            to="/"
+            to={HOME_ROUTE}
             className="flex items-center gap-2.5 font-sora font-semibold text-ice text-[15px] md:text-base tracking-[-0.02em] whitespace-nowrap"
           >
             <Logo className="h-7 w-7 md:h-8 md:w-8 rounded-[12px] shadow-ion-glow" />
             GrowthForge AI
           </Link>
 
-          <Link to="/" className="link-lift mono-label text-[12px] text-platinum md:text-[13px]">
+          <Link to={HOME_ROUTE} className="link-lift mono-label text-[12px] text-platinum md:text-[13px]">
             &larr; Terug naar home
           </Link>
         </div>

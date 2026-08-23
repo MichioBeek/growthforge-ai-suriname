@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { ChevronUp } from 'lucide-react'
-import { DEMO_URL } from '../constants.js'
+import { DEMO_URL, PAKKET_ROUTE } from '../constants.js'
 import Logo from './Logo.jsx'
 import './Navbar.css'
 
@@ -47,6 +48,7 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
+            <Link to={PAKKET_ROUTE}>Vind uw pakket</Link>
           </nav>
 
           <button
@@ -71,6 +73,9 @@ export default function Navbar() {
           <a href={DEMO_URL} onClick={() => setOpen(false)}>
             Plan een demo
           </a>
+          <Link to={PAKKET_ROUTE} onClick={() => setOpen(false)}>
+            Vind uw pakket
+          </Link>
         </nav>
         <div className="nav2-drawer-footer">
           © {new Date().getFullYear()} GrowthForge AI. Alle rechten voorbehouden.

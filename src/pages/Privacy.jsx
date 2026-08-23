@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import Logo from '../components/Logo.jsx'
 import Footer from '../components/Footer.jsx'
+import { HOME_ROUTE } from '../constants.js'
 
 const LAST_UPDATED = '17 augustus 2026'
 
@@ -39,7 +40,7 @@ export default function Privacy() {
       <header className="relative border-b border-platinum/10 px-6 py-5 md:px-12">
         <div className="mx-auto flex max-w-3xl items-center justify-between gap-4">
           <Link
-            to="/"
+            to={HOME_ROUTE}
             className="flex items-center gap-2.5 font-sora text-[15px] font-semibold tracking-[-0.02em] text-ice md:text-base"
           >
             <Logo className="h-7 w-7 rounded-[12px] shadow-ion-glow md:h-8 md:w-8" />
@@ -47,7 +48,7 @@ export default function Privacy() {
           </Link>
 
           <Link
-            to="/"
+            to={HOME_ROUTE}
             className="link-lift inline-flex items-center gap-1.5 text-[14px] font-medium text-platinum opacity-95 md:text-[15px]"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />

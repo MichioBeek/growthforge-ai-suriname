@@ -111,7 +111,52 @@ body {
   font-weight: 500;
 }
 
+/* Plain CSS entrance fade — deliberately not GSAP. A GSAP tween started
+   directly in a useEffect on mount races with React 19 StrictMode's
+   mount->cleanup->mount double-invoke in dev, which can leave elements
+   stuck mid-opacity (gsap.context().revert() killing/reverting a tween
+   the instant it starts). CSS animations aren't subject to that React
+   effect lifecycle at all, so this is used for any entrance animation
+   that fires immediately on mount (not gated behind ScrollTrigger). */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-in-up {
+  animation: fade-in-up 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* Opacity-only variant — use instead of .fade-in-up on elements that also
+   carry a static `translate-y-*` utility (e.g. a "popped up" pricing card),
+   since the transform in .fade-in-up's end keyframe would otherwise
+   override/fight that static transform once the animation finishes. */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.fade-in {
+  animation: fade-in 0.6s ease-out both;
+}
+
 ::selection {
   background: rgba(61, 231, 222, 0.3);
   color: #0a0a0a;
+}
+
+/* buildmyagent.io support-chat bubble (injected in index.html, sitewide)
+   is hidden on routes that toggle this class on <html> — currently just
+   the "Vind uw pakket" quiz, whose own CTAs shouldn't compete with it in
+   the same bottom-right corner. See Pakket.jsx. */
+html.hide-chat-widget #ai-chat-widget-host-6a5f953015299b7136a9aee8 {
+  display: none !important;
 }
