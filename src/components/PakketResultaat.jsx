@@ -1,4 +1,5 @@
-import { Check, Rocket, TrendingUp, Crown } from 'lucide-react'
+import { useState } from 'react'
+import { Check, Rocket, TrendingUp, Crown, Phone } from 'lucide-react'
 import { PACKAGE_TIERS_BY_CATEGORY } from '../data/packages.js'
 import { buildPakketWhatsAppLink } from '../constants.js'
 
@@ -42,8 +43,18 @@ const TIER_ACCENT = {
   },
 }
 
-export default function PakketResultaat({ businessName, categoryLabel, category, onTierCtaClick }) {
+export default function PakketResultaat({ businessName, categoryLabel, category, onTierCtaClick, onPhoneSubmit }) {
   const tiers = PACKAGE_TIERS_BY_CATEGORY[category]
+  const [phone, setPhone] = useState('')
+  const [phoneSent, setPhoneSent] = useState(false)
+
+  const submitPhone = (e) => {
+    e.preventDefault()
+    const trimmedPhone = phone.trim()
+    if (!trimmedPhone) return
+    onPhoneSubmit(trimmedPhone)
+    setPhoneSent(true)
+  }
 
   return (
     <div>
@@ -123,6 +134,44 @@ export default function PakketResultaat({ businessName, categoryLabel, category,
           </div>
           )
         })}
+      </div>
+
+      <div className="mx-auto mt-10 max-w-lg rounded-[2rem] border border-platinum/15 bg-carbon/60 px-6 py-7 text-center md:px-10">
+        {phoneSent ? (
+          <p className="flex items-center justify-center gap-2 font-sora text-[15px] font-semibold text-ice">
+            <Check className="h-4 w-4 text-ion" strokeWidth={2.5} aria-hidden="true" />
+            Bedankt — Michio neemt persoonlijk contact met u op.
+          </p>
+        ) : (
+          <>
+            <p className="text-[14px] leading-snug text-platinum opacity-90 md:text-[15px]">
+              Nog niet zeker welk pakket? Laat uw WhatsApp-nummer achter en Michio neemt persoonlijk
+              contact op — geen verplichtingen.
+            </p>
+            <form onSubmit={submitPhone} className="mt-5 flex flex-col gap-3 sm:flex-row">
+              <div className="relative flex-1">
+                <Phone
+                  className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-platinum/50"
+                  aria-hidden="true"
+                />
+                <input
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="Bijv. 597 71234567"
+                  className="w-full rounded-2xl border border-platinum/20 bg-void py-3.5 pl-11 pr-4 font-sora text-[14px] text-ice placeholder:text-platinum/60 focus:border-ion focus:shadow-ion-glow focus:outline-none"
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={!phone.trim()}
+                className="shrink-0 rounded-full border border-platinum/25 bg-transparent px-6 py-3.5 font-sora text-[14px] font-semibold text-ice transition-all duration-300 hover:-translate-y-0.5 hover:border-ice disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                Verstuur
+              </button>
+            </form>
+          </>
+        )}
       </div>
     </div>
   )

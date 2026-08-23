@@ -47,15 +47,19 @@ export const PAKKET_OTHER_BUSINESS_WHATSAPP_LINK =
 // on wedge-offer/WhatsApp-first sales) so a quiz completion lands in the
 // "Pakket Quiz Leads" Google Sheet even if the visitor never actually sends
 // the WhatsApp message. Make.com scenario "Pakket Quiz - Lead Capture"
-// (id 6028072) -> Google Sheets addRow. Fire-and-forget: never throws, never
-// blocks the UI — losing a sheet row is fine, losing the WhatsApp handoff
-// isn't.
+// (id 6028072) -> Google Sheets addRow, plus (only when `phone` is set) an
+// email to Michio so he can personally reach out on WhatsApp — a bot can't
+// message someone who hasn't messaged first without an approved WhatsApp
+// message template, which this project doesn't have, so this is a manual
+// human follow-up by design, not automation. Fire-and-forget: never throws,
+// never blocks the UI — losing a sheet row is fine, losing the WhatsApp
+// handoff isn't.
 const PAKKET_LEAD_WEBHOOK_URL = 'https://hook.us2.make.com/k2c9cfyqfvxaqrzyxewhghs888x18m8y'
 
-export function capturePakketLead({ businessName, category, stage, tier = '' }) {
+export function capturePakketLead({ businessName, category, stage, tier = '', phone = '' }) {
   fetch(PAKKET_LEAD_WEBHOOK_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ businessName, category, stage, tier }),
+    body: JSON.stringify({ businessName, category, stage, tier, phone }),
   }).catch(() => {})
 }

@@ -262,6 +262,15 @@ export default function Pakket() {
                       tier: tier.name,
                     })
                   }}
+                  onPhoneSubmit={(phone) => {
+                    trackEvent('pakket_phone_submitted', { category: category.id })
+                    capturePakketLead({
+                      businessName: trimmedName,
+                      category: category.label,
+                      stage: 'Telefoon',
+                      phone,
+                    })
+                  }}
                 />
               </div>
             </div>
