@@ -1,18 +1,26 @@
 import { REVIEWS } from '../data/reviews.js'
 import './TrustedBy.css'
 
-// Real client names first, then the industries GrowthForge AI actually
-// serves — never fabricated company logos or claimed partnerships.
-const LOGO_ITEMS = [
-  ...REVIEWS.map((r) => ({ label: r.business, font: "'Source Serif 4', serif" })),
-  { label: 'Kappers & Barbershops', font: "Georgia, serif" },
-  { label: 'Klinieken', font: "'Inter', sans-serif" },
-  { label: 'Fotografen', font: "system-ui, sans-serif" },
-  { label: 'Autobedrijven', font: "'Inter', sans-serif" },
-  { label: 'Restaurants', font: "Georgia, serif" },
-]
+// Only add an entry here once a real logo file has been pulled from that
+// client's own site/brand assets — never a placeholder or invented mark.
+// Clients without an entry here simply don't appear in the strip yet —
+// logos only, no text-name fallback.
+const CLIENT_LOGOS = {
+  'R Flow Plumbing Solutions': '/logos/r-flow-plumbing.png',
+  'Sen Studios': '/logos/sen-creative-studios.png',
+  'Quite Confidence': '/logos/quiet-confidence-q.png',
+  'OGPictures': '/logos/og-pictures.png',
+  'Reminisce Photography': '/logos/reminisce-photography.png',
+}
+
+const LOGO_ITEMS = REVIEWS.filter((r) => CLIENT_LOGOS[r.business]).map((r) => ({
+  label: r.business,
+  logo: CLIENT_LOGOS[r.business],
+}))
 
 export default function TrustedBy() {
+  if (LOGO_ITEMS.length === 0) return null
+
   return (
     <section className="tb-section">
       <div className="tb-inner">
@@ -22,13 +30,12 @@ export default function TrustedBy() {
           <div className="tb-marquee-track">
             {Array.from({ length: 4 }).map((_, row) =>
               LOGO_ITEMS.map((item) => (
-                <span
+                <img
                   key={`${row}-${item.label}`}
-                  className="tb-logo"
-                  style={{ fontFamily: item.font }}
-                >
-                  {item.label}
-                </span>
+                  src={item.logo}
+                  alt={item.label}
+                  className="tb-logo-img"
+                />
               ))
             )}
           </div>

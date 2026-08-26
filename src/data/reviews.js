@@ -10,6 +10,9 @@
 //   rating: 5,                     // 1-5, whole number, as given on Google
 //   quote: 'Exacte tekst van de review, woord voor woord.',
 //   date: '2026-08-01',            // ISO date the review was posted
+//   url: 'https://client-site.com', // optional — only add once the client's
+//                                    // site is actually live. Omit entirely
+//                                    // rather than link a site that isn't up yet.
 // }
 export const REVIEWS = [
   {
@@ -26,6 +29,7 @@ export const REVIEWS = [
     rating: 5,
     quote: 'Ik ben zeer tevreden over de service. Snel en professioneel \u{1F4AF}.',
     date: '2026-08-02',
+    url: 'https://rflowplumbing.com',
   },
   {
     name: 'Dvon',
@@ -42,6 +46,7 @@ export const REVIEWS = [
     quote:
       'Ik ben super tevreden met de website die Growth Forge AI voor OGPictures heeft gemaakt. Het ontwerp ziet er modern, professioneel en strak uit. Alles werkt soepel en er is goed geluisterd naar mijn wensen. De communicatie was prettig en het eindresultaat heeft mijn verwachtingen overtroffen.',
     date: '2026-08-05',
+    url: 'https://dreamy-fairy-ce36b0.netlify.app',
   },
   {
     name: 'Shervin Jagroep',
@@ -57,5 +62,14 @@ export const REVIEWS = [
     rating: 5,
     quote: 'Very good service. En wist heel goed in te spelen op de "wants and needs" van mijn onderneming',
     date: '2026-08-10',
+    url: 'https://stately-frangollo-aa1474.netlify.app',
+  },
+  {
+    name: 'Jenerino Homoet',
+    business: 'Quite Confidence',
+    rating: 4,
+    quote: 'Top service, duidelijkheid en in 1 woord. Je krijg meer dan je betaald. Proberen waard.',
+    date: '2026-08-25',
+    url: 'https://quietconfidence-salon.netlify.app',
   },
 ]
