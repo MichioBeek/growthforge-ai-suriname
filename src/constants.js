@@ -15,7 +15,7 @@ export const CONTACT_EMAIL = 'hello@growthforgeai.org'
 // this number is a real scarcity claim, not decorative, so it has to stay
 // accurate against the Financials log, not just leads in progress.
 export const WEBSITE_OFFER_TOTAL_SPOTS = 10
-export const WEBSITE_OFFER_SPOTS_REMAINING = 8
+export const WEBSITE_OFFER_SPOTS_REMAINING = 6
 export const WEBSITE_OFFER_NEXT_PRICE = '$150–200'
 export const WEBSITE_OFFER_WHATSAPP_LINK =
   'https://wa.me/5977422735?text=' + encodeURIComponent('Hoi Michio, ik wil de $50 website actie zien')
