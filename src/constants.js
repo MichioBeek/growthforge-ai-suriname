@@ -20,13 +20,13 @@ export const WEBSITE_OFFER_NEXT_PRICE = '$150–200'
 export const WEBSITE_OFFER_WHATSAPP_LINK =
   'https://wa.me/5977422735?text=' + encodeURIComponent('Hoi Michio, ik wil de $50 website actie zien')
 
-// "Vind uw pakket" quiz is the site's landing page (root) — every visitor
-// hits this first now. The original marketing homepage (hero, $50 offer,
-// diensten, reviews, etc.) moved to /home, reachable via a "Home" button.
-// Routes live here (not hardcoded in App.jsx/Navbar.jsx/pages) so every
-// reference stays in sync if a path ever changes.
-export const PAKKET_ROUTE = '/'
-export const HOME_ROUTE = '/home'
+// The marketing homepage (hero, $50 offer, diensten, reviews, etc.) is the
+// site root again — a visitor who clicks the link lands there, not on the
+// quiz. The "Vind uw pakket" quiz lives at /pakket, reachable from the
+// Navbar. Routes live here (not hardcoded in App.jsx/Navbar.jsx/pages) so
+// every reference stays in sync if a path ever changes.
+export const HOME_ROUTE = '/'
+export const PAKKET_ROUTE = '/pakket'
 
 // Fallback for a visitor on /pakket whose business doesn't fit any category
 // yet — routes straight to WhatsApp instead of a made-up package quote.

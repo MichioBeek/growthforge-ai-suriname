@@ -26,12 +26,12 @@ function App() {
 
   return (
     <Routes>
-      <Route path={PAKKET_ROUTE} element={<Pakket />} />
       <Route path={HOME_ROUTE} element={<Home />} />
+      <Route path={PAKKET_ROUTE} element={<Pakket />} />
       <Route path="/voorwaarden" element={<Voorwaarden />} />
       <Route path="/privacy" element={<Privacy />} />
-      {/* Old quiz URL — redirect so it never dead-ends if it's already been shared */}
-      <Route path="/pakket" element={<Navigate to={PAKKET_ROUTE} replace />} />
+      {/* Anything else falls back to the homepage */}
+      <Route path="*" element={<Navigate to={HOME_ROUTE} replace />} />
     </Routes>
   )
 }

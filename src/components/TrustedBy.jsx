@@ -13,10 +13,23 @@ const CLIENT_LOGOS = {
   'Reminisce Photography': '/logos/reminisce-photography.png',
 }
 
-const LOGO_ITEMS = REVIEWS.filter((r) => CLIENT_LOGOS[r.business]).map((r) => ({
-  label: r.business,
-  logo: CLIENT_LOGOS[r.business],
-}))
+// Clients we've built for who don't have a Google review in REVIEWS (yet) but
+// should still show in the strip. Same rule: real logo file only, no invented
+// marks. Kept separate from CLIENT_LOGOS so the review-linked list stays a
+// pure mirror of REVIEWS.
+const EXTRA_CLIENT_LOGOS = [
+  { label: 'Squad Cuts', logo: '/logos/squad-cuts.png' },
+  { label: 'The Hood', logo: '/logos/the-hood.png' },
+  { label: 'SPF Catering', logo: '/logos/spf-catering.png' },
+]
+
+const LOGO_ITEMS = [
+  ...REVIEWS.filter((r) => CLIENT_LOGOS[r.business]).map((r) => ({
+    label: r.business,
+    logo: CLIENT_LOGOS[r.business],
+  })),
+  ...EXTRA_CLIENT_LOGOS,
+]
 
 export default function TrustedBy() {
   if (LOGO_ITEMS.length === 0) return null
