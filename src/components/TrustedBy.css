@@ -38,14 +38,23 @@
 .tb-marquee-track {
   display: flex;
   align-items: center;
-  gap: 48px;
   width: max-content;
   animation: marquee-left 30s linear infinite;
+}
+
+.tb-marquee-group {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  /* trailing gap so the two groups tile seamlessly across the -50% loop */
+  padding-right: 48px;
+  flex-shrink: 0;
 }
 
 .tb-logo-img {
   height: 32px;
   width: auto;
+  flex-shrink: 0;
   object-fit: contain;
   opacity: 0.85;
 }

@@ -41,16 +41,26 @@ export default function TrustedBy() {
 
         <div className="tb-marquee">
           <div className="tb-marquee-track">
-            {Array.from({ length: 4 }).map((_, row) =>
-              LOGO_ITEMS.map((item) => (
-                <img
-                  key={`${row}-${item.label}`}
-                  src={item.logo}
-                  alt={item.label}
-                  className="tb-logo-img"
-                />
-              ))
-            )}
+            {/* Two identical groups. Each group carries its own trailing gap
+               (padding-right), so the track is exactly two tiles wide and the
+               -50% animation lands on a perfect seam every loop — no snap,
+               even while large logo images are still loading. */}
+            {Array.from({ length: 2 }).map((_, group) => (
+              <div
+                className="tb-marquee-group"
+                key={group}
+                aria-hidden={group === 1 ? 'true' : undefined}
+              >
+                {LOGO_ITEMS.map((item) => (
+                  <img
+                    key={`${group}-${item.label}`}
+                    src={item.logo}
+                    alt={item.label}
+                    className="tb-logo-img"
+                  />
+                ))}
+              </div>
+            ))}
           </div>
         </div>
       </div>
