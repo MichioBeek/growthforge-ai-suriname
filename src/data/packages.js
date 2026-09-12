@@ -92,7 +92,7 @@ export const PACKAGE_TIERS_BY_CATEGORY = {
       tagline: 'Onze meest gekozen combinatie',
       features: [
         'Online boekingssysteem',
-        'AI Chatbot via WhatsApp',
+        'WhatsApp Chatbot',
         'Automatisch reviewverzoek na afspraak',
       ],
       highlight: true,
@@ -105,7 +105,7 @@ export const PACKAGE_TIERS_BY_CATEGORY = {
       tagline: 'Voor wie maximaal wil opschalen',
       features: [
         'Online boekingssysteem',
-        'AI Chatbot via WhatsApp',
+        'WhatsApp Chatbot',
         'Automatisch reviewverzoek na afspraak',
         ...PREMIUM_EXTRAS,
       ],
@@ -126,7 +126,7 @@ export const PACKAGE_TIERS_BY_CATEGORY = {
       tagline: 'Voorkomt no-shows en gemiste leads tijdens een shoot',
       features: [
         'Boekingssysteem met aanbetaling',
-        'AI Chatbot via WhatsApp',
+        'WhatsApp Chatbot',
       ],
       highlight: true,
     },
@@ -138,7 +138,7 @@ export const PACKAGE_TIERS_BY_CATEGORY = {
       tagline: 'Volledige groei-stack — nooit meer een gemiste boeking',
       features: [
         'Boekingssysteem met aanbetaling',
-        'AI Chatbot via WhatsApp',
+        'WhatsApp Chatbot',
         'Automatisch reviewverzoek na levering',
         'Automatische klant-reactivatie',
         ...PREMIUM_EXTRAS,
@@ -159,7 +159,7 @@ export const PACKAGE_TIERS_BY_CATEGORY = {
       monthlyPrice: '$95/mnd',
       tagline: 'Reageer direct op elke lead, boek bezichtigingen automatisch',
       features: [
-        'AI Chatbot via WhatsApp',
+        'WhatsApp Chatbot',
         'Online boekingssysteem voor bezichtigingen',
       ],
       highlight: true,
@@ -171,9 +171,9 @@ export const PACKAGE_TIERS_BY_CATEGORY = {
       monthlyPrice: '$500/mnd',
       tagline: 'Voor makelaars met veel leads — geen gemiste lead, ooit',
       features: [
-        'AI Chatbot via WhatsApp',
+        'WhatsApp Chatbot',
         'Online boekingssysteem voor bezichtigingen',
-        'Voice AI agent — neemt en kwalificeert inkomende telefoontjes',
+        'Telefoon-assistent — neemt en kwalificeert inkomende telefoontjes',
         'Automatische klant-reactivatie',
         ...PREMIUM_EXTRAS,
       ],
@@ -193,7 +193,7 @@ export const PACKAGE_TIERS_BY_CATEGORY = {
       tagline: 'Minder gemiste reserveringen en bestellingen buiten openingstijd',
       features: [
         'Online reserveringssysteem',
-        'AI Chatbot via WhatsApp',
+        'WhatsApp Chatbot',
       ],
       highlight: true,
     },
@@ -205,7 +205,7 @@ export const PACKAGE_TIERS_BY_CATEGORY = {
       tagline: 'Volledige stack inclusief automatische reviews',
       features: [
         'Online reserveringssysteem',
-        'AI Chatbot via WhatsApp',
+        'WhatsApp Chatbot',
         'Automatisch reviewverzoek na bezoek',
         ...PREMIUM_EXTRAS,
       ],

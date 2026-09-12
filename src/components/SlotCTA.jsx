@@ -45,12 +45,12 @@ export default function SlotCTA() {
           </span>
 
           <h2 className="mt-6 text-4xl italic leading-[1.1] text-ice font-serif md:text-6xl lg:text-7xl">
-            Laat uw AI het werk doen.
+            Laat het systeem het werk doen.
           </h2>
 
           <p className="mt-6 text-base leading-relaxed text-ice opacity-90 md:text-lg">
-            In een gratis demo van 15 minuten laten we live zien wat de AI voor úw bedrijf kan
-            doen. Geen verplichtingen.
+            In een gratis demo van 15 minuten laten we live zien wat dit voor úw bedrijf kan doen.
+            Geen verplichtingen.
           </p>
 
           <a

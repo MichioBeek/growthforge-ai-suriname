@@ -497,7 +497,7 @@ function WebsiteFeatureCard() {
           </h3>
           <p className="mt-2 text-[15px] leading-relaxed text-platinum opacity-90 md:text-base">
             Nog geen website, of aan vervanging toe? Wij bouwen een snelle, professionele site die
-            bezoekers omzet in klanten — naadloos gekoppeld aan uw AI-assistenten.
+            bezoekers omzet in klanten — naadloos gekoppeld aan uw andere systemen.
           </p>
         </div>
         <div className="w-full md:flex-1">
@@ -544,34 +544,34 @@ export default function Features() {
         <div className="mx-auto mb-14 max-w-2xl text-center md:mb-20">
           <span className="mono-label text-[12px] uppercase text-ion md:text-[13px]">Onze Diensten</span>
           <h2 className="mt-4 font-sora text-3xl font-bold text-ice md:text-4xl">
-            AI-systemen voor uw bedrijf. <span className="font-serif italic font-normal text-platinum">Eén onzichtbare crew.</span>
+            De problemen die u geld kosten, opgelost. <span className="font-serif italic font-normal text-platinum">Eén onzichtbare crew.</span>
           </h2>
         </div>
 
         <div ref={gridRef} className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
           <FeatureCard
-            title="Reactivatie AI"
+            title="Klant Reactivatie"
             descriptor="Brengt oude klanten automatisch terug met een persoonlijk aanbod."
           >
             <DiagnosticShuffler />
           </FeatureCard>
 
           <FeatureCard
-            title="Google Review AI"
+            title="Meer Google Reviews"
             descriptor="Stuurt na elke afspraak automatisch een bericht en haalt zo meer 5-sterren reviews binnen."
           >
             <TelemetryTypewriter />
           </FeatureCard>
 
           <FeatureCard
-            title="AI Telefoniste"
+            title="Altijd Bereikbaar"
             descriptor="Neemt gemiste en na-uur oproepen aan en boekt de beller direct in."
           >
             <CallTranscript />
           </FeatureCard>
 
           <FeatureCard
-            title="AI Chatbot"
+            title="Directe WhatsApp Reacties"
             descriptor="Beantwoordt vragen op uw website of WhatsApp — dag en nacht — en boekt bezoekers direct in."
           >
             <ChatBubbleStream />

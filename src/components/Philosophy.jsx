@@ -66,7 +66,7 @@ export default function Philosophy() {
           ref={addLineRef}
           className="font-sora text-4xl font-bold leading-[1.15] tracking-tight text-ice md:text-6xl lg:text-7xl"
         >
-          Wij vangen ze <span className="text-ion">allemaal</span> op — met AI die nooit slaapt.
+          Wij vangen ze <span className="text-ion">allemaal</span> op — dag en nacht, zonder dat u erbij hoeft te zijn.
         </p>
       </div>
     </section>

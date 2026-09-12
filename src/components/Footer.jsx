@@ -35,7 +35,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="mt-4 max-w-xs text-[15px] leading-relaxed text-platinum opacity-90">
-              AI-automatisering voor Surinaamse ondernemers.
+              Systemen die gemiste klanten opvangen, voor Surinaamse ondernemers.
             </p>
 
             <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-platinum/15 bg-carbon px-4 py-2">

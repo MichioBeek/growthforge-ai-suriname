@@ -5,11 +5,11 @@ import { REVIEWS } from '../data/reviews.js'
 import './Hero.css'
 
 const TICKER_ITEMS = [
-  'Voice AI Agents',
-  'Review Automatisering',
-  'Klant Reactivatie',
-  'AI Chatbots',
-  'Boekingssystemen',
+  'Geen Gemiste Oproepen',
+  'Meer Google Reviews',
+  'Klanten Die Terugkomen',
+  'Direct Antwoord op WhatsApp',
+  'Boekingen Die Zichzelf Regelen',
 ]
 
 const LINE_COUNT = 20
@@ -73,8 +73,8 @@ export default function Hero() {
         </h1>
 
         <p className="hero3-subtitle">
-          Een flexibel AI-partnerschap voor ondernemers in Suriname die willen groeien zonder
-          gedoe — volledig op uw tempo.
+          Wij bouwen systemen die de klanten opvangen die u nu misloopt — op maat van uw bedrijf,
+          zonder gedoe, volledig op uw tempo.
         </p>
 
         <div className="hero3-cta-row">
