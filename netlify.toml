@@ -2,6 +2,25 @@
   command = "npm run build"
   publish = "dist"
 
+# Betalingen (client payment-proof upload) lives on its own Netlify site —
+# proxied here so payment links read as growthforgeai.org/betaling/... instead
+# of the raw growthforge-ai-betalingen.netlify.app domain. The /api/payment/*
+# rule is needed too: betaling.js calls that path as a same-origin relative
+# fetch, which after this proxy means "same origin" is growthforgeai.org, so
+# that call needs proxying as well or it would 404 against this site instead.
+# Must stay above the catch-all SPA redirect below (first match wins).
+[[redirects]]
+  from = "/betaling/*"
+  to = "https://growthforge-ai-betalingen.netlify.app/betaling/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/payment/*"
+  to = "https://growthforge-ai-betalingen.netlify.app/api/payment/:splat"
+  status = 200
+  force = true
+
 [[redirects]]
   from = "/*"
   to = "/index.html"

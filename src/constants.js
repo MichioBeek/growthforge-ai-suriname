@@ -15,7 +15,7 @@ export const CONTACT_EMAIL = 'hello@growthforgeai.org'
 // this number is a real scarcity claim, not decorative, so it has to stay
 // accurate against the Financials log, not just leads in progress.
 export const WEBSITE_OFFER_TOTAL_SPOTS = 10
-export const WEBSITE_OFFER_SPOTS_REMAINING = 4
+export const WEBSITE_OFFER_SPOTS_REMAINING = 2
 export const WEBSITE_OFFER_NEXT_PRICE = '$150–200'
 export const WEBSITE_OFFER_WHATSAPP_LINK =
   'https://wa.me/5977422735?text=' + encodeURIComponent('Hoi Michio, ik wil de $50 website actie zien')
@@ -27,6 +27,18 @@ export const WEBSITE_OFFER_WHATSAPP_LINK =
 // every reference stays in sync if a path ever changes.
 export const HOME_ROUTE = '/'
 export const PAKKET_ROUTE = '/pakket'
+export const START_ROUTE = '/start'
+
+// Raw digits-only WhatsApp number (no +, no spaces) for wa.me links.
+const WHATSAPP_NUMBER_RAW = '5977422735'
+
+// Builds a wa.me deep link with a pre-filled message. Used by /start (the
+// qualification landing page — see Start.jsx) to bake a visitor's answers
+// straight into the opening WhatsApp message, so the lead bot starts the
+// conversation with full context instead of a generic "meer info" opener.
+export function buildWhatsAppLink(text) {
+  return `https://wa.me/${WHATSAPP_NUMBER_RAW}?text=${encodeURIComponent(text)}`
+}
 
 // Fallback for a visitor on /pakket whose business doesn't fit any category
 // yet — routes straight to WhatsApp instead of a made-up package quote.

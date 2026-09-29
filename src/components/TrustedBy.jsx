@@ -5,12 +5,19 @@ import './TrustedBy.css'
 // client's own site/brand assets — never a placeholder or invented mark.
 // Clients without an entry here simply don't appear in the strip yet —
 // logos only, no text-name fallback.
+// w/h are each file's real intrinsic pixel size (not the rendered size —
+// CSS still renders every logo at a fixed 32px height). Passed through as
+// the <img> width/height attributes so the browser reserves the right
+// aspect-ratio box before the image bytes arrive: without them every logo
+// lays out at 0 width until it decodes, and each one popping in shoves the
+// rest of the already-animating marquee track sideways — visible as a
+// jump/cut right around whichever logo was still loading.
 const CLIENT_LOGOS = {
-  'R Flow Plumbing Solutions': '/logos/r-flow-plumbing.png',
-  'Sen Studios': '/logos/sen-creative-studios.png',
-  'Quite Confidence': '/logos/quiet-confidence-q.png',
-  'OGPictures': '/logos/og-pictures.png',
-  'Reminisce Photography': '/logos/reminisce-photography.png',
+  'R Flow Plumbing Solutions': { src: '/logos/r-flow-plumbing.png', w: 320, h: 241 },
+  'Sen Studios': { src: '/logos/sen-creative-studios.png', w: 1076, h: 408 },
+  'Quite Confidence': { src: '/logos/quiet-confidence-q.png', w: 337, h: 351 },
+  'OGPictures': { src: '/logos/og-pictures.png', w: 870, h: 814 },
+  'Reminisce Photography': { src: '/logos/reminisce-photography.png', w: 150, h: 150 },
 }
 
 // Clients we've built for who don't have a Google review in REVIEWS (yet) but
@@ -18,17 +25,19 @@ const CLIENT_LOGOS = {
 // marks. Kept separate from CLIENT_LOGOS so the review-linked list stays a
 // pure mirror of REVIEWS.
 const EXTRA_CLIENT_LOGOS = [
-  { label: 'Squad Cuts', logo: '/logos/squad-cuts.png' },
-  { label: 'The Hood', logo: '/logos/the-hood.png' },
-  { label: 'SPF Catering', logo: '/logos/spf-catering.png' },
+  { label: 'Squad Cuts', logo: '/logos/squad-cuts.png', w: 606, h: 760 },
+  { label: 'The Hood', logo: '/logos/the-hood.png', w: 361, h: 361 },
+  { label: 'SPF Catering', logo: '/logos/spf-catering.png', w: 647, h: 720 },
 ]
 
 const LOGO_ITEMS = [
   ...REVIEWS.filter((r) => CLIENT_LOGOS[r.business]).map((r) => ({
     label: r.business,
-    logo: CLIENT_LOGOS[r.business],
+    logo: CLIENT_LOGOS[r.business].src,
+    w: CLIENT_LOGOS[r.business].w,
+    h: CLIENT_LOGOS[r.business].h,
   })),
-  ...EXTRA_CLIENT_LOGOS,
+  ...EXTRA_CLIENT_LOGOS.map(({ label, logo, w, h }) => ({ label, logo, w, h })),
 ]
 
 export default function TrustedBy() {
@@ -56,6 +65,8 @@ export default function TrustedBy() {
                     key={`${group}-${item.label}`}
                     src={item.logo}
                     alt={item.label}
+                    width={item.w}
+                    height={item.h}
                     className="tb-logo-img"
                   />
                 ))}

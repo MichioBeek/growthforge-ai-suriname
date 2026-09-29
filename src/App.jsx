@@ -6,7 +6,8 @@ import Home from './pages/Home.jsx'
 import Voorwaarden from './pages/Voorwaarden.jsx'
 import Privacy from './pages/Privacy.jsx'
 import Pakket from './pages/Pakket.jsx'
-import { PAKKET_ROUTE, HOME_ROUTE } from './constants.js'
+import Start from './pages/Start.jsx'
+import { PAKKET_ROUTE, HOME_ROUTE, START_ROUTE } from './constants.js'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -28,6 +29,7 @@ function App() {
     <Routes>
       <Route path={HOME_ROUTE} element={<Home />} />
       <Route path={PAKKET_ROUTE} element={<Pakket />} />
+      <Route path={START_ROUTE} element={<Start />} />
       <Route path="/voorwaarden" element={<Voorwaarden />} />
       <Route path="/privacy" element={<Privacy />} />
       {/* Anything else falls back to the homepage */}
