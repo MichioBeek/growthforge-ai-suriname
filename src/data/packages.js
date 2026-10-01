@@ -6,25 +6,21 @@
 // SOP - AI Automation Menu by Niche (Obsidian vault), which sets, per
 // niche, which automation solves the most real pain first.
 //
-// Pricing (updated 2026-08-22 after Michio repriced the base booking system
-// ($95/$45, was $50/$25) and appointment-type WhatsApp chatbot ($150/$50,
-// was $100/$40) on SOP - Pricing & Packages — the old sums felt too cheap
-// for what's actually being built). Groei tiers are now a plain sum of
-// those two services (no markup, no discount) — since the base rates are
-// now cost-accurate, the sum alone reflects real build effort. That's also
-// why every non-booking category's Groei is identical: they're all the
-// same 2 services applied to a different business type. Premium tiers are
-// priced on VALUE, not cost-plus, same logic the Pricing SOP already uses
-// for the booking category's own Premium bundle ("being the only one doing
-// this locally is a legitimate pricing argument, not just a marketing
-// line") — scaled per niche by how much a missed lead/booking actually
-// costs that business (real estate commission > restaurant no-show).
-// The 'booking' category's own Groei/Premium bundle was reconciled to the
-// new base rates on 2026-08-23, then its 3rd service was swapped same-day
-// from lead reactivation to review automation to actually match this
-// niche's SOP menu (Groei $180/$75 → $295/$110; Premium $600–800/$250–350
-// → $750–950/$300–400, bumped to preserve the gap to Groei) — see the
-// vault SOP.
+// Pricing (rebuilt 2026-10-01): synced 1:1 with SOP - Prijskaart Q4 2026
+// (Obsidian vault) — THE single source of truth; the lead bot and the
+// prijskaart artifact quote the same numbers. The three cards are now the
+// three Q4 Automatiseringspakketten: 1) Website + Review AI, 2) Alles-in-één
+// (middle, highlighted — "de meeste klanten pakken alles-in-één"),
+// 3) WhatsApp-bot + Review AI. Card slots keep the old starter/groei/premium
+// ids because PakketResultaat.jsx keys icons + accent styling on them.
+// Q4 rules baked in: no "vanaf" — every price is an exact computed total
+// (pakketprijs = met Basic website; Medium +$250, Pro +$600); opzetkosten
+// and maandprijs always shown separately with their breakdown; hosting
+// $15/mnd standard on every website; bot monthly = volumetier (new clients
+// start on Rustig $75, tot ~300 gesprekken/mnd) + review AI $20; the bot
+// niveau differs per niche (booking/creative/makelaar = niveau 3 boekingen,
+// restaurant = niveau 4 bestellingen → P2 $335→$485, P3 $475→$625).
+// Change prices HERE only after the Q4 SOP changes, never the other way.
 
 export const QUIZ_CATEGORIES = [
   {
@@ -49,167 +45,92 @@ export const QUIZ_CATEGORIES = [
   },
 ]
 
-const WEBSITE_TIER = {
-  id: 'starter',
-  name: 'Starter',
-  setupPrice: '$50',
-  monthlyPrice: null,
-  tagline: 'Eenmalig — uw eerste stap online',
-  features: [
-    'Complete website met uw eigen info, foto’s en contactgegevens',
-    'Live binnen enkele dagen na betaling',
-  ],
-  highlight: false,
-}
-
-// Every Premium tier ends with these 3 lines — kept identical across
-// categories on purpose so the Premium tier reads consistently sitewide.
-const PREMIUM_EXTRAS = [
-  'Gratis eigen domeinnaam (1 jaar, normaal $20/jaar)',
-  'Prioriteit levering',
-  'Rechtstreeks lijntje met Michio — geen supportqueue',
+// Builds the three Q4 pakket-cards for one niche. `bot` describes what the
+// bot does in that niche's own words; prices come straight from the Q4
+// matrix for that bot niveau.
+const q4Cards = ({ botFeature, reviewFeature, p2Setup, p3Setup, extraP1Features = [] }) => [
+  {
+    id: 'starter',
+    name: 'Website + Review AI',
+    setupPrice: '$199',
+    monthlyPrice: '$35/mnd',
+    tagline: 'Professioneel online + automatisch meer Google reviews',
+    features: [
+      'Complete website — prijs is met Basic; Medium +$250, Pro +$600',
+      reviewFeature,
+      'Maandprijs: review AI $20 + hosting $15',
+      'Alleen een website? Basic $150 eenmalig + $15/mnd hosting',
+      ...extraP1Features,
+    ],
+    highlight: false,
+  },
+  {
+    id: 'groei',
+    name: 'Alles-in-één',
+    setupPrice: p3Setup,
+    monthlyPrice: '$110/mnd',
+    tagline: 'Website, WhatsApp-bot en review AI in één systeem',
+    features: [
+      'Complete website — prijs is met Basic; Medium +$250, Pro +$600',
+      botFeature,
+      reviewFeature,
+      'Maandprijs: bot $75 (Rustig, tot ±300 gesprekken/mnd) + review AI $20 + hosting $15',
+    ],
+    highlight: true,
+  },
+  {
+    id: 'premium',
+    name: 'WhatsApp-bot + Review AI',
+    setupPrice: p2Setup,
+    monthlyPrice: '$95/mnd',
+    tagline: 'Al een website? Dan alleen de automatisering',
+    features: [
+      botFeature,
+      reviewFeature,
+      'Maandprijs: bot $75 (Rustig, tot ±300 gesprekken/mnd) + review AI $20',
+    ],
+    highlight: false,
+  },
 ]
 
 export const PACKAGE_TIERS_BY_CATEGORY = {
-  // Booking-type businesses (kapper/salon/nagelstudio/lash studio — the
-  // "Nail Studios / Lash Studios / Aesthetic Beauty" niche in
-  // SOP - AI Automation Menu by Niche): booking is the #1 pain, then
-  // chatbot, then REVIEW AUTOMATION — that SOP's menu for this niche never
-  // includes lead reactivation, it's Instagram/review-driven growth
-  // instead. Swapped 2026-08-23 (was reactivation, which fits restaurants/
-  // photographers better, not this niche) per Michio's call.
-  // Groei = plain sum of booking ($95/$45) + appointment chatbot ($150/$50)
-  // + review automation ($50/$15) at current base rates = $295/$110.
-  // Premium bumped 2026-08-23 to preserve a clear gap above Groei; still
-  // value-priced, not a strict multiple.
-  booking: [
-    WEBSITE_TIER,
-    {
-      id: 'groei',
-      name: 'Groei',
-      setupPrice: '$295',
-      monthlyPrice: '$110/mnd',
-      tagline: 'Onze meest gekozen combinatie',
-      features: [
-        'Online boekingssysteem',
-        'WhatsApp Chatbot',
-        'Automatisch reviewverzoek na afspraak',
-      ],
-      highlight: true,
-    },
-    {
-      id: 'premium',
-      name: 'Premium',
-      setupPrice: '$750–950',
-      monthlyPrice: '$300–400/mnd',
-      tagline: 'Voor wie maximaal wil opschalen',
-      features: [
-        'Online boekingssysteem',
-        'WhatsApp Chatbot',
-        'Automatisch reviewverzoek na afspraak',
-        ...PREMIUM_EXTRAS,
-      ],
-      highlight: false,
-    },
-  ],
+  // Booking-type businesses (kapper/salon/nagelstudio/lash studio): bot
+  // niveau 3 (boekingen maken) — P2 $335, P3 $475 per the Q4 matrix. The
+  // goedkope statische boekingskalender wordt hier ook genoemd (Q4-regel:
+  // altijd beide boekingsvormen noemen, klant kiest op budget).
+  booking: q4Cards({
+    botFeature: 'WhatsApp boekingsbot — plant afspraken in én beantwoordt vragen, 24/7',
+    reviewFeature: 'Google review AI — vraagt na elke afspraak automatisch om een review',
+    p2Setup: '$335',
+    p3Setup: '$475',
+    extraP1Features: ['Boekingskalender erbij? +$75 eenmalig + $30/mnd'],
+  }),
 
-  // Fotografen/videografen: SOP zegt booking+aanbetaling (voorkomt no-shows)
-  // en chatbot (vangt "wat kost het" op tijdens een shoot) eerst, dan
-  // reviews (net na levering is het beste moment) en reactivatie.
-  creative: [
-    WEBSITE_TIER,
-    {
-      id: 'groei',
-      name: 'Groei',
-      setupPrice: '$245',
-      monthlyPrice: '$95/mnd',
-      tagline: 'Voorkomt no-shows en gemiste leads tijdens een shoot',
-      features: [
-        'Boekingssysteem met aanbetaling',
-        'WhatsApp Chatbot',
-      ],
-      highlight: true,
-    },
-    {
-      id: 'premium',
-      name: 'Premium',
-      setupPrice: '$750',
-      monthlyPrice: '$300/mnd',
-      tagline: 'Volledige groei-stack — nooit meer een gemiste boeking',
-      features: [
-        'Boekingssysteem met aanbetaling',
-        'WhatsApp Chatbot',
-        'Automatisch reviewverzoek na levering',
-        'Automatische klant-reactivatie',
-        ...PREMIUM_EXTRAS,
-      ],
-      highlight: false,
-    },
-  ],
+  // Fotografen/videografen: zelfde niveau 3 boekingsbot, maar dan voor
+  // shoots — vangt "wat kost het" op terwijl u zelf aan het schieten bent.
+  creative: q4Cards({
+    botFeature: 'WhatsApp boekingsbot — plant shoots in en beantwoordt prijsvragen, ook tijdens uw shoots',
+    reviewFeature: 'Google review AI — vraagt na elke levering automatisch om een review',
+    p2Setup: '$335',
+    p3Setup: '$475',
+    extraP1Features: ['Boekingskalender erbij? +$75 eenmalig + $30/mnd'],
+  }),
 
-  // Makelaars: SOP zegt speed-to-lead is verreweg de grootste hefboom
-  // (gemiste lead = gemiste commissie), dus chatbot eerst voor snelle
-  // opvolging, Voice AI in Premium voor wie echt veel leadvolume heeft.
-  makelaar: [
-    WEBSITE_TIER,
-    {
-      id: 'groei',
-      name: 'Groei',
-      setupPrice: '$245',
-      monthlyPrice: '$95/mnd',
-      tagline: 'Reageer direct op elke lead, boek bezichtigingen automatisch',
-      features: [
-        'WhatsApp Chatbot',
-        'Online boekingssysteem voor bezichtigingen',
-      ],
-      highlight: true,
-    },
-    {
-      id: 'premium',
-      name: 'Premium',
-      setupPrice: '$1.200',
-      monthlyPrice: '$500/mnd',
-      tagline: 'Voor makelaars met veel leads — geen gemiste lead, ooit',
-      features: [
-        'WhatsApp Chatbot',
-        'Online boekingssysteem voor bezichtigingen',
-        'Telefoon-assistent — neemt en kwalificeert inkomende telefoontjes',
-        'Automatische klant-reactivatie',
-        ...PREMIUM_EXTRAS,
-      ],
-      highlight: false,
-    },
-  ],
+  // Makelaars: speed-to-lead is de grootste hefboom — niveau 3 bot reageert
+  // direct op elke lead en plant bezichtigingen in.
+  makelaar: q4Cards({
+    botFeature: 'WhatsApp-bot — reageert direct op elke lead en plant bezichtigingen in',
+    reviewFeature: 'Google review AI — vraagt na elke deal automatisch om een review',
+    p2Setup: '$335',
+    p3Setup: '$475',
+  }),
 
-  // Restaurants/catering: SOP zegt reserveringen/no-shows eerst, dan
-  // chatbot voor bestellingen buiten openingstijd, dan reviews na bezoek.
-  restaurant: [
-    WEBSITE_TIER,
-    {
-      id: 'groei',
-      name: 'Groei',
-      setupPrice: '$245',
-      monthlyPrice: '$95/mnd',
-      tagline: 'Minder gemiste reserveringen en bestellingen buiten openingstijd',
-      features: [
-        'Online reserveringssysteem',
-        'WhatsApp Chatbot',
-      ],
-      highlight: true,
-    },
-    {
-      id: 'premium',
-      name: 'Premium',
-      setupPrice: '$450',
-      monthlyPrice: '$175/mnd',
-      tagline: 'Volledige stack inclusief automatische reviews',
-      features: [
-        'Online reserveringssysteem',
-        'WhatsApp Chatbot',
-        'Automatisch reviewverzoek na bezoek',
-        ...PREMIUM_EXTRAS,
-      ],
-      highlight: false,
-    },
-  ],
+  // Restaurants/catering: niveau 4 bot (bestellingen aannemen) — P2 $485,
+  // P3 $625 per de Q4-matrix.
+  restaurant: q4Cards({
+    botFeature: 'WhatsApp-bot — neemt reserveringen én bestellingen aan, ook buiten openingstijd',
+    reviewFeature: 'Google review AI — vraagt na elk bezoek automatisch om een review',
+    p2Setup: '$485',
+    p3Setup: '$625',
+  }),
 }

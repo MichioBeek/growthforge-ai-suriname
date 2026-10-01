@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { X } from 'lucide-react'
-import { WEBSITE_OFFER_NEXT_PRICE, WEBSITE_OFFER_SPOTS_REMAINING } from '../constants.js'
 import './OfferBanner.css'
 
 export default function OfferBanner() {
@@ -16,8 +15,7 @@ export default function OfferBanner() {
           <span className="offer-banner-dot-core" />
         </span>
         <span className="offer-banner-text">
-          Introductieprijs: <strong>$50 website</strong> &mdash; nog{' '}
-          {WEBSITE_OFFER_SPOTS_REMAINING} plekken, daarna {WEBSITE_OFFER_NEXT_PRICE}
+          Complete website: <strong>$150 eenmalig</strong> &mdash; live binnen enkele dagen
         </span>
         <span className="offer-banner-arrow" aria-hidden="true">
           &rarr;

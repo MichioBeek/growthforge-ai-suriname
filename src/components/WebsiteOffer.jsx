@@ -4,22 +4,17 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Check } from 'lucide-react'
 import { REVIEWS } from '../data/reviews.js'
 import {
-  WEBSITE_OFFER_NEXT_PRICE,
-  WEBSITE_OFFER_SPOTS_REMAINING,
-  WEBSITE_OFFER_TOTAL_SPOTS,
+  WEBSITE_TIERS,
+  WEBSITE_HOSTING_MONTHLY,
   WEBSITE_OFFER_WHATSAPP_LINK,
 } from '../constants.js'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const INCLUDED = [
-  'Complete website met uw eigen info, foto’s en contactgegevens',
-  'Live binnen enkele dagen na betaling',
-  'Eenmalig $50 voor de website zelf — geen verplichting',
-]
-
-const SPOTS_FILLED = WEBSITE_OFFER_TOTAL_SPOTS - WEBSITE_OFFER_SPOTS_REMAINING
-
+// Q4 2026: de oude $50 launch-actie (spots-teller + doorgestreepte prijs) is
+// vervangen door de drie vaste website-tiers uit SOP - Prijskaart Q4 2026 —
+// dezelfde prijzen die de lead bot en de /pakket quiz noemen. Geen "vanaf",
+// geen scarcity: gewoon de echte totalen, hosting er meteen bij.
 export default function WebsiteOffer() {
   const sectionRef = useRef(null)
   const contentRef = useRef(null)
@@ -56,65 +51,49 @@ export default function WebsiteOffer() {
         <div ref={contentRef} className="relative mx-auto max-w-3xl">
           <div className="text-center">
             <span className="mono-label text-[12px] text-ion md:text-[13px]">
-              INTRODUCTIEPRIJS &middot; BEPERKTE PLEKKEN
+              WEBSITES OP MAAT &middot; VASTE PRIJZEN
             </span>
 
-            <div className="mt-6 flex flex-wrap items-end justify-center gap-4">
-              <span className="glow-ion font-sora text-6xl font-bold text-ion md:text-7xl">
-                $50
-              </span>
-              <span className="mb-1 flex flex-col items-start text-left">
-                <span className="text-lg text-platinum/60 line-through md:text-xl">
-                  {WEBSITE_OFFER_NEXT_PRICE}
-                </span>
-                <span className="mono-label text-[11px] text-platinum opacity-90 md:text-[12px]">
-                  daarna deze prijs
-                </span>
-              </span>
-            </div>
+            <h2 className="mt-6 font-sora text-3xl font-bold tracking-[-0.02em] text-ice md:text-4xl">
+              Kies de website die bij uw bedrijf past
+            </h2>
 
             <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-platinum opacity-90 md:text-base">
-              Een complete website voor uw bedrijf, eenmalig $50 &mdash; mijn introductieprijs
-              voor de eerste {WEBSITE_OFFER_TOTAL_SPOTS} klanten.
+              Drie vaste prijzen, geen verrassingen. Elke website draait op hosting van{' '}
+              {WEBSITE_HOSTING_MONTHLY} en staat live binnen enkele dagen na betaling.
             </p>
           </div>
 
-          <div className="mt-10">
-            <div className="flex items-center justify-between">
-              <span className="mono-label text-[11px] text-ice opacity-90 md:text-[12px]">
-                {SPOTS_FILLED} VAN {WEBSITE_OFFER_TOTAL_SPOTS} PLEKKEN GEBRUIKT
-              </span>
-              <span className="mono-label text-[11px] text-ion md:text-[12px]">
-                NOG {WEBSITE_OFFER_SPOTS_REMAINING} OVER
-              </span>
-            </div>
-            <div className="mt-3 grid grid-cols-10 gap-1.5 md:gap-2">
-              {Array.from({ length: WEBSITE_OFFER_TOTAL_SPOTS }).map((_, i) => (
-                <span
-                  key={i}
-                  className={[
-                    'h-2.5 rounded-full md:h-3',
-                    i < SPOTS_FILLED ? 'bg-ion shadow-ion-glow' : 'bg-void/40 ring-1 ring-platinum/20',
-                  ].join(' ')}
-                  aria-hidden="true"
-                />
-              ))}
-            </div>
-          </div>
-
-          <ul className="mt-10 grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-4">
-            {INCLUDED.map((item) => (
-              <li
-                key={item}
-                className="flex items-start gap-2.5 rounded-2xl border border-platinum/15 bg-carbon px-4 py-3.5"
+          <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
+            {WEBSITE_TIERS.map((tier) => (
+              <div
+                key={tier.name}
+                className="flex flex-col rounded-2xl border border-platinum/15 bg-carbon px-5 py-6"
               >
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-ion" strokeWidth={2.5} aria-hidden="true" />
-                <span className="text-[13.5px] leading-snug text-ice opacity-90 md:text-[14px]">
-                  {item}
+                <span className="mono-label text-[11px] text-ion md:text-[12px]">
+                  {tier.name.toUpperCase()}
                 </span>
-              </li>
+                <div className="mt-3 flex flex-wrap items-end gap-2">
+                  <span className="font-sora text-3xl font-bold text-ice md:text-4xl">
+                    {tier.price}
+                  </span>
+                  <span className="mb-1 text-[12.5px] text-platinum opacity-90 md:text-[13px]">
+                    eenmalig + {WEBSITE_HOSTING_MONTHLY}
+                  </span>
+                </div>
+                <ul className="mt-5 flex-1 space-y-2.5">
+                  {tier.features.map((feature) => (
+                    <li key={feature} className="flex items-start gap-2.5">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-ion" strokeWidth={2.5} aria-hidden="true" />
+                      <span className="text-[13.5px] leading-snug text-ice opacity-90 md:text-[14px]">
+                        {feature}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
-          </ul>
+          </div>
 
           {clientNames.length > 0 && (
             <p className="mt-8 text-center text-[13px] leading-relaxed text-platinum opacity-80 md:text-[14px]">
@@ -133,12 +112,11 @@ export default function WebsiteOffer() {
             >
               <span className="btn-wipe" />
               <span className="btn-label font-sora text-[15px] font-semibold md:text-base">
-                Claim uw plek
+                App Michio over uw website
               </span>
             </a>
             <p className="mono-label mt-4 text-[11px] text-platinum opacity-90 md:text-[12px]">
-              NOG {WEBSITE_OFFER_SPOTS_REMAINING} PLEKKEN TEGEN DEZE PRIJS &mdash; DAARNA{' '}
-              {WEBSITE_OFFER_NEXT_PRICE}
+              75% AANBETALING OM TE STARTEN &mdash; 25% BIJ OPLEVERING
             </p>
           </div>
         </div>

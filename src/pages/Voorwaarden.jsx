@@ -87,8 +87,8 @@ export default function Voorwaarden() {
               <SubHeading>a. Website op maat (eenmalig)</SubHeading>
               <p className="mt-2">
                 Het bouwen en opleveren van een website voor uw bedrijf, tegen een{' '}
-                <Bold>eenmalig, vooraf overeengekomen bedrag</Bold> — bijvoorbeeld de $50
-                introductieprijs of een hoger pakket. Dit is geen abonnement.
+                <Bold>eenmalig, vooraf overeengekomen bedrag</Bold> — het Basic-, Medium- of
+                Pro-tarief. Daarnaast geldt een vast maandbedrag voor hosting, vooraf benoemd.
               </p>
             </div>
             <div>

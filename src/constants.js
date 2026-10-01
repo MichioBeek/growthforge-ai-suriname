@@ -9,18 +9,44 @@ export const WHATSAPP_NUMBER = '+597 7422735'
 export const WHATSAPP_LINK = 'https://wa.me/5977422735'
 export const CONTACT_EMAIL = 'hello@growthforgeai.org'
 
-// $50 website launch offer (first 10 spots, then $150-200) — the WebsiteOffer
-// section on the live site. Update WEBSITE_OFFER_SPOTS_REMAINING by hand
-// every time a spot closes, same discipline as the Meta Ads campaign copy —
-// this number is a real scarcity claim, not decorative, so it has to stay
-// accurate against the Financials log, not just leads in progress.
-export const WEBSITE_OFFER_TOTAL_SPOTS = 10
-export const WEBSITE_OFFER_SPOTS_REMAINING = 2
-export const WEBSITE_OFFER_NEXT_PRICE = '$150–200'
+// Q4 2026 website tiers — synced 2026-10-01 with SOP - Prijskaart Q4 2026
+// (Obsidian vault), the single source of truth that the lead bot and the
+// /pakket quiz also quote. The old $50 launch actie (spots-teller) is dood
+// sinds 2026-09-19 en is hier verwijderd. Hosting is standaard $15/mnd bij
+// élke website — altijd meteen bij de prijs noemen, geen verrassing achteraf.
+export const WEBSITE_TIERS = [
+  {
+    name: 'Basic',
+    price: '$150',
+    features: ['1–3 pagina’s', 'Uw eigen content en foto’s', 'Gratis subdomain'],
+  },
+  {
+    name: 'Medium',
+    price: '$400',
+    features: [
+      'Meerdere pagina’s',
+      'Custom design en branding',
+      'Galerij + contactformulier',
+      'Basis SEO',
+    ],
+  },
+  {
+    name: 'Pro',
+    price: '$750',
+    features: [
+      'Volledig maatwerk design',
+      'Onbeperkt pagina’s',
+      'Prioriteit: oplevering binnen 24 uur',
+      '1 jaar eigen domeinnaam inbegrepen',
+    ],
+  },
+]
+export const WEBSITE_HOSTING_MONTHLY = '$15/mnd'
 export const WEBSITE_OFFER_WHATSAPP_LINK =
-  'https://wa.me/5977422735?text=' + encodeURIComponent('Hoi Michio, ik wil de $50 website actie zien')
+  'https://wa.me/5977422735?text=' +
+  encodeURIComponent('Hoi Michio, ik wil een website laten maken — wat zijn de mogelijkheden?')
 
-// The marketing homepage (hero, $50 offer, diensten, reviews, etc.) is the
+// The marketing homepage (hero, website-aanbod, diensten, reviews, etc.) is the
 // site root again — a visitor who clicks the link lands there, not on the
 // quiz. The "Vind uw pakket" quiz lives at /pakket, reachable from the
 // Navbar. Routes live here (not hardcoded in App.jsx/Navbar.jsx/pages) so

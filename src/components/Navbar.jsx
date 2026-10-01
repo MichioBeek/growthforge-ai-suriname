@@ -12,7 +12,7 @@ const NAV_LINKS = [
   { label: 'Contact', href: '#contact' },
 ]
 
-const DRAWER_LINKS = [...NAV_LINKS, { label: 'Demo', href: '#demo' }]
+const DRAWER_LINKS = NAV_LINKS
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
