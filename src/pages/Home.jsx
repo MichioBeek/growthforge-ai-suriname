@@ -273,28 +273,62 @@ const VIDEOS = [
 
 function VideoProof() {
   const ref = useReveal()
+
+  // Mobile: compact 3-across tiles without inline controls — tapping one
+  // expands it fullscreen (webkitEnterFullscreen is the iOS Safari path).
+  // Desktop (sm+): regular inline players with controls.
+  const expand = (e) => {
+    if (window.matchMedia('(min-width: 640px)').matches) return
+    const video = e.currentTarget.querySelector('video')
+    if (!video) return
+    video.play()
+    if (video.webkitEnterFullscreen) video.webkitEnterFullscreen()
+    else video.requestFullscreen?.()
+  }
+
   return (
     <section ref={ref} className="mx-auto max-w-5xl px-6 pb-24 md:pb-32">
       <h2 className="reveal font-sora text-[32px] font-bold tracking-[-0.03em] text-ice md:text-[40px]">
         Zie het in actie
       </h2>
       <p className="reveal mt-3 max-w-xl text-[16px] leading-relaxed text-platinum">
-        Echte systemen, draaiend bij echte bedrijven in Suriname.
+        Echte systemen, draaiend bij echte bedrijven in Suriname. Tik om te bekijken.
       </p>
-      <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
+      <div className="mt-8 grid grid-cols-3 gap-3 sm:mt-10 sm:gap-6">
         {VIDEOS.map((v, i) => (
           <figure key={v.src} className="reveal" style={{ '--d': `${i * 0.1}s` }}>
-            <div className="overflow-hidden rounded-3xl bg-forest" style={{ aspectRatio: '9 / 16' }}>
+            <div
+              onClick={expand}
+              className="relative cursor-pointer overflow-hidden rounded-2xl bg-forest sm:cursor-auto sm:rounded-3xl"
+              style={{ aspectRatio: '9 / 16' }}
+            >
+              {/* Mobile tile: clean preview frame; the controls live in fullscreen */}
               <video
                 src={`${v.src}#t=0.1`}
-                controls
                 playsInline
                 preload="metadata"
-                className="h-full w-full object-cover"
+                controls={false}
+                className="pointer-events-none h-full w-full object-cover sm:pointer-events-auto"
+                ref={(el) => {
+                  // sm+ gets native inline controls; mobile stays bare
+                  if (el) el.controls = window.matchMedia('(min-width: 640px)').matches
+                }}
               />
+              {/* Play badge, mobile only */}
+              <span
+                className="absolute inset-0 flex items-center justify-center sm:hidden"
+                aria-hidden="true"
+              >
+                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-black/45 backdrop-blur-sm">
+                  <svg viewBox="0 0 24 24" className="ml-0.5 h-5 w-5 fill-white">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </span>
+              </span>
             </div>
-            <figcaption className="mt-3 text-[14px] text-platinum">
-              <span className="font-semibold text-ice">{v.label}</span> · {v.sub}
+            <figcaption className="mt-2 text-center text-[12px] leading-tight text-platinum sm:mt-3 sm:text-left sm:text-[14px]">
+              <span className="font-semibold text-ice">{v.label}</span>
+              <span className="hidden sm:inline"> · {v.sub}</span>
             </figcaption>
           </figure>
         ))}
