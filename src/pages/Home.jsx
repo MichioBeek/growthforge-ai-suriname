@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { MessageCircle, ArrowRight, Star } from 'lucide-react'
 import Logo from '../components/Logo.jsx'
@@ -14,6 +15,32 @@ const WA_LINK = buildWhatsAppLink(
   'Hoi! Ik wil meer klanten binnenhalen met een website of systeem — kunnen we praten?'
 )
 
+// Reveals children (elements carrying .reveal) once the section scrolls into
+// view — IntersectionObserver + a CSS class, deliberately not GSAP (see the
+// StrictMode note in index.css).
+function useReveal() {
+  const ref = useRef(null)
+  useEffect(() => {
+    const root = ref.current
+    if (!root) return
+    const targets = root.querySelectorAll('.reveal')
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible')
+            io.unobserve(e.target)
+          }
+        })
+      },
+      { threshold: 0.15 }
+    )
+    targets.forEach((t) => io.observe(t))
+    return () => io.disconnect()
+  }, [])
+  return ref
+}
+
 // Inline ring-arrow that replaces the "o" of "omzet" in the hero headline.
 // Sized/offset to sit on the text baseline like a letter.
 function RingO({ className }) {
@@ -26,6 +53,8 @@ function RingO({ className }) {
     >
       <g transform="translate(5,8)">
         <path
+          className="ring-draw"
+          pathLength="1"
           d="M 30 2 A 27 27 0 1 0 56.5 33"
           fill="none"
           stroke="#0e7a55"
@@ -33,6 +62,7 @@ function RingO({ className }) {
           strokeLinecap="round"
         />
         <path
+          className="ring-arrow-pop"
           d="M 45 8 L 61 2 L 58 19"
           fill="none"
           stroke="#0e7a55"
@@ -76,11 +106,42 @@ function Nav() {
 
 function Hero() {
   return (
-    <section className="mx-auto max-w-5xl px-6 pb-24 pt-20 md:pb-32 md:pt-28">
-      <p className="font-sora text-[14px] font-semibold uppercase tracking-[0.18em] text-ion">
+    <section className="relative mx-auto max-w-5xl overflow-visible px-6 pb-24 pt-20 md:pb-32 md:pt-28">
+      {/* Ambient watermark ring, barely visible, drifting behind the content */}
+      <svg
+        viewBox="0 0 72 72"
+        aria-hidden="true"
+        className="ring-ambient pointer-events-none absolute -right-20 top-6 hidden h-[460px] w-[460px] md:block"
+        style={{ opacity: 0.05 }}
+      >
+        <g transform="translate(4,6)">
+          <path
+            d="M 32 4 A 28 28 0 1 0 59.5 36"
+            fill="none"
+            stroke="#0e7a55"
+            strokeWidth="6"
+            strokeLinecap="round"
+          />
+          <path
+            d="M 47 10 L 63 4 L 60 21"
+            fill="none"
+            stroke="#0e7a55"
+            strokeWidth="6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </g>
+      </svg>
+      <p
+        className="hero-enter font-sora text-[14px] font-semibold uppercase tracking-[0.18em] text-ion"
+        style={{ '--d': '0.05s' }}
+      >
         Websites · WhatsApp-bots · Boekingen
       </p>
-      <h1 className="mt-5 font-sora text-[52px] font-bold leading-[1.02] tracking-[-0.04em] text-ice sm:text-[72px] md:text-[92px]">
+      <h1
+        className="hero-enter mt-5 font-sora text-[52px] font-bold leading-[1.02] tracking-[-0.04em] text-ice sm:text-[72px] md:text-[92px]"
+        style={{ '--d': '0.15s' }}
+      >
         Meer klanten.
         <br />
         <span className="whitespace-nowrap">
@@ -88,11 +149,14 @@ function Hero() {
           mzet.
         </span>
       </h1>
-      <p className="mt-7 max-w-xl text-[18px] leading-relaxed text-platinum md:text-[20px]">
+      <p
+        className="hero-enter mt-7 max-w-xl text-[18px] leading-relaxed text-platinum md:text-[20px]"
+        style={{ '--d': '0.3s' }}
+      >
         Wij bouwen websites, WhatsApp-bots en boekingssystemen die klanten voor je
         binnenhalen — terwijl jij gewoon doorwerkt. Voor ondernemers in Suriname.
       </p>
-      <div className="mt-10 flex flex-wrap items-center gap-5">
+      <div className="hero-enter mt-10 flex flex-wrap items-center gap-5" style={{ '--d': '0.45s' }}>
         <a
           href={WA_LINK}
           target="_blank"
@@ -110,7 +174,7 @@ function Hero() {
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </Link>
       </div>
-      <p className="mt-10 text-[14px] text-platinum">
+      <p className="hero-enter mt-10 text-[14px] text-platinum" style={{ '--d': '0.6s' }}>
         Gebouwd voor 10+ bedrijven in Suriname — van barbershops tot catering.
       </p>
     </section>
@@ -137,14 +201,19 @@ const DIENSTEN = [
 ]
 
 function Diensten() {
+  const ref = useReveal()
   return (
-    <section id="diensten" className="mx-auto max-w-5xl px-6 pb-24 md:pb-32">
-      <h2 className="font-sora text-[32px] font-bold tracking-[-0.03em] text-ice md:text-[40px]">
+    <section ref={ref} id="diensten" className="mx-auto max-w-5xl px-6 pb-24 md:pb-32">
+      <h2 className="reveal font-sora text-[32px] font-bold tracking-[-0.03em] text-ice md:text-[40px]">
         Wat we bouwen
       </h2>
       <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2">
-        {DIENSTEN.map((d) => (
-          <div key={d.title} className="rounded-3xl bg-carbon p-8">
+        {DIENSTEN.map((d, i) => (
+          <div
+            key={d.title}
+            className="reveal card-lift rounded-3xl bg-carbon p-8"
+            style={{ '--d': `${i * 0.08}s` }}
+          >
             <h3 className="font-sora text-[20px] font-bold text-ice">{d.title}</h3>
             <p className="mt-3 text-[16px] leading-relaxed text-platinum">{d.text}</p>
           </div>
@@ -173,14 +242,15 @@ const STAPPEN = [
 ]
 
 function Werkwijze() {
+  const ref = useReveal()
   return (
-    <section id="werkwijze" className="mx-auto max-w-5xl px-6 pb-24 md:pb-32">
-      <h2 className="font-sora text-[32px] font-bold tracking-[-0.03em] text-ice md:text-[40px]">
+    <section ref={ref} id="werkwijze" className="mx-auto max-w-5xl px-6 pb-24 md:pb-32">
+      <h2 className="reveal font-sora text-[32px] font-bold tracking-[-0.03em] text-ice md:text-[40px]">
         Zo werkt het
       </h2>
       <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-3">
-        {STAPPEN.map((s) => (
-          <div key={s.nr}>
+        {STAPPEN.map((s, i) => (
+          <div key={s.nr} className="reveal" style={{ '--d': `${i * 0.12}s` }}>
             <span className="font-sora text-[15px] font-bold text-ion">{s.nr}</span>
             <h3 className="mt-2 font-sora text-[20px] font-bold text-ice">{s.title}</h3>
             <p className="mt-2 text-[16px] leading-relaxed text-platinum">{s.text}</p>
@@ -192,16 +262,21 @@ function Werkwijze() {
 }
 
 function Reviews() {
+  const ref = useReveal()
   const shown = REVIEWS.slice(0, 3)
   if (shown.length === 0) return null
   return (
-    <section className="mx-auto max-w-5xl px-6 pb-24 md:pb-32">
-      <h2 className="font-sora text-[32px] font-bold tracking-[-0.03em] text-ice md:text-[40px]">
+    <section ref={ref} className="mx-auto max-w-5xl px-6 pb-24 md:pb-32">
+      <h2 className="reveal font-sora text-[32px] font-bold tracking-[-0.03em] text-ice md:text-[40px]">
         Wat klanten zeggen
       </h2>
       <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
-        {shown.map((r) => (
-          <figure key={r.name} className="flex flex-col rounded-3xl border border-ice/10 p-8">
+        {shown.map((r, i) => (
+          <figure
+            key={r.name}
+            className="reveal card-lift flex flex-col rounded-3xl border border-ice/10 p-8"
+            style={{ '--d': `${i * 0.1}s` }}
+          >
             <div className="flex gap-1" aria-label={`${r.rating} van 5 sterren`}>
               {Array.from({ length: r.rating }).map((_, i) => (
                 <Star key={i} className="h-4 w-4 fill-ion text-ion" aria-hidden="true" />
@@ -221,9 +296,10 @@ function Reviews() {
 }
 
 function CTABand() {
+  const ref = useReveal()
   return (
-    <section className="px-6 pb-24 md:pb-32">
-      <div className="mx-auto max-w-5xl rounded-[2.5rem] bg-forest px-8 py-16 text-center md:py-20">
+    <section ref={ref} className="px-6 pb-24 md:pb-32">
+      <div className="reveal mx-auto max-w-5xl rounded-[2.5rem] bg-forest px-8 py-16 text-center md:py-20">
         <h2 className="font-sora text-[34px] font-bold tracking-[-0.03em] text-void md:text-[48px]">
           Klaar voor meer omzet?
         </h2>
