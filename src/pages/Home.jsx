@@ -261,6 +261,47 @@ function Werkwijze() {
   )
 }
 
+// Real client videos from the Omzetto TikTok (@omzetto) — embedded so a
+// visitor can watch the systems working at real businesses.
+const VIDEOS = [
+  { id: '7691746053271440661', label: 'Squad Cuts', sub: 'Boekingssysteem' },
+  { id: '7685411324393753877', label: 'SPF Catering', sub: 'Bestelsysteem' },
+  { id: '7684998006017363220', label: 'Quiet Confidence', sub: 'Website + boekingen' },
+]
+
+function VideoProof() {
+  const ref = useReveal()
+  return (
+    <section ref={ref} className="mx-auto max-w-5xl px-6 pb-24 md:pb-32">
+      <h2 className="reveal font-sora text-[32px] font-bold tracking-[-0.03em] text-ice md:text-[40px]">
+        Zie het in actie
+      </h2>
+      <p className="reveal mt-3 max-w-xl text-[16px] leading-relaxed text-platinum">
+        Echte systemen, draaiend bij echte bedrijven in Suriname.
+      </p>
+      <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
+        {VIDEOS.map((v, i) => (
+          <figure key={v.id} className="reveal" style={{ '--d': `${i * 0.1}s` }}>
+            <div className="overflow-hidden rounded-3xl bg-forest" style={{ aspectRatio: '9 / 16' }}>
+              <iframe
+                src={`https://www.tiktok.com/embed/v2/${v.id}`}
+                title={`${v.label} — ${v.sub} (TikTok video)`}
+                loading="lazy"
+                allow="encrypted-media; fullscreen"
+                allowFullScreen
+                className="h-full w-full border-0"
+              />
+            </div>
+            <figcaption className="mt-3 text-[14px] text-platinum">
+              <span className="font-semibold text-ice">{v.label}</span> · {v.sub}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 function Reviews() {
   const ref = useReveal()
   const shown = REVIEWS.slice(0, 3)
@@ -337,6 +378,7 @@ export default function Home() {
       <Hero />
       <Diensten />
       <Werkwijze />
+      <VideoProof />
       <Reviews />
       <CTABand />
       <Footer />
