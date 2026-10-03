@@ -54,10 +54,10 @@ body {
 
 /* Soft Ion Cyan glow, for interactive/accent elements only — never behind body text */
 .glow-ion {
-  box-shadow: 0 0 20px rgba(61, 231, 222, 0.35);
+  box-shadow: 0 0 20px rgba(14, 122, 85, 0.25);
 }
 .glow-ion-lg {
-  box-shadow: 0 0 40px rgba(61, 231, 222, 0.45);
+  box-shadow: 0 0 40px rgba(14, 122, 85, 0.3);
 }
 
 /* Magnetic button base: scale + glow intensify on hover, color-wipe span inside.
@@ -79,7 +79,7 @@ body {
 .btn-magnetic .btn-wipe {
   position: absolute;
   inset: 0;
-  background: #3de7de;
+  background: #0e7a55;
   transform: translateX(-101%);
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   z-index: 0;
@@ -101,7 +101,7 @@ body {
 }
 .link-lift:hover {
   transform: translateY(-1px);
-  color: #3de7de;
+  color: #0e7a55;
 }
 
 /* Mono label utility: enforces legibility rule tracking + weight */

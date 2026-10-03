@@ -29,13 +29,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-[1.4fr_1fr_1fr] md:gap-8">
           <div>
             <div className="flex items-center gap-3">
-              <Logo className="h-9 w-9 rounded-[12px] shadow-ion-glow" />
+              <Logo className="h-9 w-9 rounded-[12px]" />
               <span className="font-sora text-2xl font-bold tracking-[-0.02em] text-ice">
-                GrowthForge AI
+                omzetto
               </span>
             </div>
             <p className="mt-4 max-w-xs text-[15px] leading-relaxed text-platinum opacity-90">
-              Systemen die gemiste klanten opvangen, voor Surinaamse ondernemers.
+              Systemen die je omzet laten groeien, voor ondernemers in Suriname.
             </p>
 
             <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-platinum/15 bg-carbon px-4 py-2">
@@ -95,7 +95,7 @@ export default function Footer() {
 
         <div className="mt-16 flex flex-col-reverse items-center justify-between gap-4 border-t border-platinum/10 pt-6 md:flex-row">
           <span className="text-[13px] text-platinum opacity-90">
-            © {new Date().getFullYear()} GrowthForge AI. Alle rechten voorbehouden.
+            © {new Date().getFullYear()} Omzetto. Alle rechten voorbehouden.
           </span>
           <div className="flex items-center gap-6">
             {LEGAL_LINKS.map((link) => (

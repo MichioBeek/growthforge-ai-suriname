@@ -39,7 +39,7 @@ export default function Navbar() {
         <div className="nav2-inner">
           <a href="#hero" className="nav2-logo" onClick={() => setOpen(false)}>
             <Logo className="nav2-logo-icon h-8 w-8" />
-            GrowthForge AI
+            Omzetto
           </a>
 
           <nav className="nav2-links">
@@ -78,7 +78,7 @@ export default function Navbar() {
           </Link>
         </nav>
         <div className="nav2-drawer-footer">
-          © {new Date().getFullYear()} GrowthForge AI. Alle rechten voorbehouden.
+          © {new Date().getFullYear()} Omzetto. Alle rechten voorbehouden.
         </div>
       </div>
     </>

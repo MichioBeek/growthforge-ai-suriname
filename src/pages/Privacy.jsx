@@ -26,7 +26,7 @@ function SubHeading({ children }) {
 
 export default function Privacy() {
   useEffect(() => {
-    document.title = 'Privacybeleid — GrowthForge AI'
+    document.title = 'Privacybeleid — Omzetto'
   }, [])
 
   return (
@@ -44,7 +44,7 @@ export default function Privacy() {
             className="flex items-center gap-2.5 font-sora text-[15px] font-semibold tracking-[-0.02em] text-ice md:text-base"
           >
             <Logo className="h-7 w-7 rounded-[12px] shadow-ion-glow md:h-8 md:w-8" />
-            GrowthForge AI
+            Omzetto
           </Link>
 
           <Link
@@ -62,14 +62,14 @@ export default function Privacy() {
         <div className="mx-auto max-w-3xl">
           <p className="mono-label text-[12px] text-ion md:text-[13px]">PRIVACYBELEID</p>
           <h1 className="mt-4 font-sora text-3xl font-bold tracking-[-0.02em] text-ice md:text-4xl">
-            Privacybeleid — GrowthForge AI
+            Privacybeleid — Omzetto
           </h1>
           <p className="mt-3 text-[15px] text-platinum opacity-90">
             <span className="font-semibold text-ice">Laatst bijgewerkt:</span> {LAST_UPDATED}
           </p>
 
           <p className="mt-8 text-[15px] leading-relaxed text-platinum md:text-base">
-            GrowthForge AI ("GrowthForge AI", "wij", "ons" of "onze") is een AI-automatiseringsbureau,
+            Omzetto ("Omzetto", "wij", "ons" of "onze") is een AI-automatiseringsbureau,
             gedreven als eenmanszaak door Michio Beek. Wij leveren AI-diensten — waaronder een
             AI-telefoniste, geautomatiseerde Google-reviewverzoeken, reactivatieberichten voor
             klanten en AI-chat — aan bedrijven.
@@ -440,7 +440,7 @@ export default function Privacy() {
               </p>
               <p>Voor privacyvragen of om uw rechten uit te oefenen, neemt u contact op met:</p>
               <p className="rounded-2xl border border-platinum/10 bg-carbon p-5 leading-relaxed">
-                <span className="font-semibold text-ice">GrowthForge AI</span>
+                <span className="font-semibold text-ice">Omzetto</span>
                 <br />
                 Michio Beek, eenmanszaak
                 <br />

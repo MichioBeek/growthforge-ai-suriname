@@ -68,7 +68,7 @@ export default function Start() {
   const [showExtra, setShowExtra] = useState(false)
 
   useEffect(() => {
-    document.title = 'Welk systeem past bij uw bedrijf? — GrowthForge AI'
+    document.title = 'Welk systeem past bij uw bedrijf? — Omzetto'
   }, [])
 
   // Same reasoning as Pakket.jsx: keep the buildmyagent.io chat bubble off
@@ -148,7 +148,7 @@ export default function Start() {
       <header className="relative px-6 py-6 md:px-12 md:py-8">
         <div className="mx-auto flex max-w-3xl items-center gap-2.5">
           <Logo className="h-8 w-8 rounded-[10px] shadow-ion-glow" />
-          <span className="start-logo">GrowthForge AI</span>
+          <span className="start-logo">Omzetto</span>
         </div>
       </header>
 

@@ -38,7 +38,7 @@
   position: absolute;
   inset: 0;
   border-radius: 9999px;
-  background: #3de7de;
+  background: #0e7a55;
   opacity: 0.75;
   animation: offer-banner-ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
@@ -48,7 +48,7 @@
   height: 7px;
   width: 7px;
   border-radius: 9999px;
-  background: #3de7de;
+  background: #0e7a55;
 }
 
 @keyframes offer-banner-ping {
@@ -69,13 +69,13 @@
 }
 
 .offer-banner-text strong {
-  color: #3de7de;
+  color: #0e7a55;
   font-weight: 700;
 }
 
 .offer-banner-arrow {
   flex-shrink: 0;
-  color: #3de7de;
+  color: #0e7a55;
   font-weight: 600;
   transition: transform 0.2s ease;
 }

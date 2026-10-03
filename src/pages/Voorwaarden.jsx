@@ -30,7 +30,7 @@ function SubHeading({ children }) {
 
 export default function Voorwaarden() {
   useEffect(() => {
-    document.title = 'Algemene Voorwaarden — GrowthForge AI'
+    document.title = 'Algemene Voorwaarden — Omzetto'
   }, [])
 
   return (
@@ -43,7 +43,7 @@ export default function Voorwaarden() {
             className="flex items-center gap-2.5 font-sora font-semibold text-ice text-[15px] md:text-base tracking-[-0.02em] whitespace-nowrap"
           >
             <Logo className="h-7 w-7 md:h-8 md:w-8 rounded-[12px] shadow-ion-glow" />
-            GrowthForge AI
+            Omzetto
           </Link>
 
           <Link to={HOME_ROUTE} className="link-lift mono-label text-[12px] text-platinum md:text-[13px]">
@@ -69,7 +69,7 @@ export default function Voorwaarden() {
               Deze Algemene Voorwaarden ("Voorwaarden") zijn van toepassing op uw toegang tot en
               gebruik van de website{' '}
               <Bold>https://growthforgeai.org</Bold> (de "Website") en de diensten van GrowthForge
-              AI ("GrowthForge AI", "wij", "ons" of "onze"), een eenmanszaak gedreven door Michio
+              AI ("Omzetto", "wij", "ons" of "onze"), een eenmanszaak gedreven door Michio
               Beek, gevestigd te Paramaribo, Suriname.
             </p>
             <p className="mt-4 text-[15px] md:text-base leading-relaxed text-platinum">
@@ -82,7 +82,7 @@ export default function Voorwaarden() {
 
           {/* 1. De Diensten */}
           <Section number={1} title="De Diensten">
-            <p>GrowthForge AI levert twee soorten diensten aan bedrijven:</p>
+            <p>Omzetto levert twee soorten diensten aan bedrijven:</p>
             <div>
               <SubHeading>a. Website op maat (eenmalig)</SubHeading>
               <p className="mt-2">
@@ -404,7 +404,7 @@ export default function Voorwaarden() {
           {/* 13. Vrijwaring */}
           <Section number={13} title="Vrijwaring">
             <p>
-              U stemt ermee in GrowthForge AI en de eigenaar te vrijwaren en schadeloos te stellen
+              U stemt ermee in Omzetto en de eigenaar te vrijwaren en schadeloos te stellen
               voor alle vorderingen, schade, verliezen of kosten (waaronder redelijke juridische
               kosten) die voortvloeien uit uw gebruik van de Diensten, uw Klantinhoud, uw
               schending van deze Voorwaarden, of uw nalaten om vereiste toestemmingen te
@@ -437,7 +437,7 @@ export default function Voorwaarden() {
 
           {/* 16. Contact */}
           <Section number={16} title="Contact">
-            <p className="text-ice font-semibold">GrowthForge AI</p>
+            <p className="text-ice font-semibold">Omzetto</p>
             <p>
               Michio Beek, eenmanszaak
               <br />

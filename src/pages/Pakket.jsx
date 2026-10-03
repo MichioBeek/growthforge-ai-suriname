@@ -39,7 +39,7 @@ export default function Pakket() {
   const [selectedTier, setSelectedTier] = useState(null)
 
   useEffect(() => {
-    document.title = 'Vind uw pakket — GrowthForge AI'
+    document.title = 'Vind uw pakket — Omzetto'
   }, [])
 
   // The buildmyagent.io support-chat bubble (injected sitewide in
@@ -84,7 +84,7 @@ export default function Pakket() {
         <div className="mx-auto flex max-w-3xl items-center justify-between gap-4">
           <Link to={HOME_ROUTE} className="pakket-logo flex items-center gap-2.5">
             <Logo className="h-8 w-8 rounded-[10px] shadow-ion-glow" />
-            GrowthForge AI
+            Omzetto
           </Link>
 
           <Link to={HOME_ROUTE} className="pakket-home-btn">
