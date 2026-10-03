@@ -141,13 +141,13 @@ export default function PakketResultaat({ businessName, categoryLabel, category,
         {phoneSent ? (
           <p className="flex items-center justify-center gap-2 font-sora text-[15px] font-semibold text-ice">
             <Check className="h-4 w-4 text-ion" strokeWidth={2.5} aria-hidden="true" />
-            Bedankt — Michio neemt persoonlijk contact met u op.
+            Bedankt — we nemen snel contact met u op.
           </p>
         ) : (
           <>
             <p className="text-[14px] leading-snug text-platinum opacity-90 md:text-[15px]">
-              Nog niet zeker welk pakket? Laat uw WhatsApp-nummer achter en Michio neemt persoonlijk
-              contact op — geen verplichtingen.
+              Nog niet zeker welk pakket? Laat uw WhatsApp-nummer achter en we nemen contact op —
+              geen verplichtingen.
             </p>
             <form onSubmit={submitPhone} className="mt-5 flex flex-col gap-3 sm:flex-row">
               <div className="relative flex-1">

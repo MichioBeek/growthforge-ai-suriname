@@ -46,8 +46,8 @@ export default function PakketAanvraagForm({ tier, businessName, categoryLabel, 
             Bedankt, <span className="pakket-accent">{contactName}</span>!
           </h1>
           <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-platinum opacity-90">
-            We hebben uw aanvraag voor het {tier.name} pakket ontvangen. Michio neemt zo snel
-            mogelijk persoonlijk contact met u op via WhatsApp of e-mail — u ontvangt ook een
+            We hebben uw aanvraag voor het {tier.name} pakket ontvangen. We nemen zo snel
+            mogelijk contact met u op via WhatsApp of e-mail — u ontvangt ook een
             bevestiging in uw inbox.
           </p>
         </div>
@@ -69,8 +69,8 @@ export default function PakketAanvraagForm({ tier, businessName, categoryLabel, 
             Vraag het {tier.name} pakket <span className="pakket-accent">aan</span>
           </h1>
           <p className="mx-auto mt-3 max-w-md text-[15px] text-platinum opacity-90 md:text-base">
-            Voor {businessName} ({categoryLabel}). Vul uw gegevens in — Michio neemt persoonlijk
-            contact met u op.
+            Voor {businessName} ({categoryLabel}). Vul uw gegevens in — we nemen contact
+            met u op.
           </p>
         </div>
 
