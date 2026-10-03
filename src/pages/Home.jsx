@@ -261,12 +261,14 @@ function Werkwijze() {
   )
 }
 
-// Real client videos from the Omzetto TikTok (@omzetto) — embedded so a
-// visitor can watch the systems working at real businesses.
+// Real client videos (from the Omzetto TikTok) — self-hosted MP4s in
+// public/videos/, played with the native video element. Deliberately NOT
+// TikTok embeds: those rate-limit ("overload-protect") and scroll to other
+// videos inside the frame. `#t=0.1` makes Safari paint the first frame.
 const VIDEOS = [
-  { id: '7691746053271440661', label: 'Squad Cuts', sub: 'Boekingssysteem' },
-  { id: '7685411324393753877', label: 'SPF Catering', sub: 'Bestelsysteem' },
-  { id: '7684998006017363220', label: 'Quiet Confidence', sub: 'Website + boekingen' },
+  { src: '/videos/squadcuts.mp4', label: 'Squad Cuts', sub: 'Boekingssysteem' },
+  { src: '/videos/spfcatering.mp4', label: 'SPF Catering', sub: 'Bestelsysteem' },
+  { src: '/videos/quietconfidence.mp4', label: 'Quiet Confidence', sub: 'Website + boekingen' },
 ]
 
 function VideoProof() {
@@ -281,15 +283,14 @@ function VideoProof() {
       </p>
       <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
         {VIDEOS.map((v, i) => (
-          <figure key={v.id} className="reveal" style={{ '--d': `${i * 0.1}s` }}>
+          <figure key={v.src} className="reveal" style={{ '--d': `${i * 0.1}s` }}>
             <div className="overflow-hidden rounded-3xl bg-forest" style={{ aspectRatio: '9 / 16' }}>
-              <iframe
-                src={`https://www.tiktok.com/embed/v2/${v.id}`}
-                title={`${v.label} — ${v.sub} (TikTok video)`}
-                loading="lazy"
-                allow="encrypted-media; fullscreen"
-                allowFullScreen
-                className="h-full w-full border-0"
+              <video
+                src={`${v.src}#t=0.1`}
+                controls
+                playsInline
+                preload="metadata"
+                className="h-full w-full object-cover"
               />
             </div>
             <figcaption className="mt-3 text-[14px] text-platinum">
