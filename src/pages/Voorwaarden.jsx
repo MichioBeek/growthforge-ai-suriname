@@ -68,8 +68,8 @@ export default function Voorwaarden() {
             <p className="mt-8 text-[15px] md:text-base leading-relaxed text-platinum">
               Deze Algemene Voorwaarden ("Voorwaarden") zijn van toepassing op uw toegang tot en
               gebruik van de website{' '}
-              <Bold>https://growthforgeai.org</Bold> (de "Website") en de diensten van GrowthForge
-              AI ("Omzetto", "wij", "ons" of "onze"), een eenmanszaak gedreven door Michio
+              <Bold>https://omzetto.com</Bold> (de "Website") en de diensten van Omzetto
+              ("Omzetto", "wij", "ons" of "onze"), een eenmanszaak gedreven door Michio
               Beek, gevestigd te Paramaribo, Suriname.
             </p>
             <p className="mt-4 text-[15px] md:text-base leading-relaxed text-platinum">
@@ -453,12 +453,12 @@ export default function Voorwaarden() {
               <br />
               Website:{' '}
               <a
-                href="https://growthforgeai.org"
+                href="https://omzetto.com"
                 target="_blank"
                 rel="noreferrer"
                 className="link-lift text-ion font-semibold"
               >
-                https://growthforgeai.org
+                https://omzetto.com
               </a>
             </p>
           </Section>

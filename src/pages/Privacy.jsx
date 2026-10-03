@@ -78,10 +78,10 @@ export default function Privacy() {
             Dit Privacybeleid legt uit hoe wij persoonsgegevens verzamelen, gebruiken, delen en
             beschermen via onze website{' '}
             <a
-              href="https://growthforgeai.org"
+              href="https://omzetto.com"
               className="link-lift text-ion"
             >
-              https://growthforgeai.org
+              https://omzetto.com
             </a>{' '}
             (de "Website") en bij het leveren van onze diensten (de "Diensten"). Lees het
             aandachtig door. Bent u het er niet mee eens, gebruik dan de Website of de Diensten
@@ -455,8 +455,8 @@ export default function Privacy() {
                 </a>
                 <br />
                 Website:{' '}
-                <a href="https://growthforgeai.org" className="link-lift text-ion">
-                  https://growthforgeai.org
+                <a href="https://omzetto.com" className="link-lift text-ion">
+                  https://omzetto.com
                 </a>
               </p>
             </Section>
