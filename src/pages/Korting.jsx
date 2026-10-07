@@ -7,7 +7,7 @@ import { REVIEWS } from '../data/reviews.js'
 
 // Standalone "$25 korting" sign-up page — the link for the Instagram/TikTok bio,
 // flyers and the website-ads test. Starts with "wie ben jij?": owners and starters
-// get the $25 code form (by e-mail), people who are just looking get the monthly
+// get the $25 code form (by WhatsApp), people who are just looking get the monthly
 // e-mail newsletter. Each choice fires a pixel event, so retargeting can be split.
 
 const ROLES = [
@@ -56,7 +56,7 @@ export default function Korting() {
           </h1>
           <p className="mt-5 max-w-md text-[17px] leading-relaxed text-platinum md:text-[18px]">
             Verlies geen klant meer. Vertel kort wie je bent. Heb je een bedrijf? Dan krijg
-            je je code meteen in je mail, 7 dagen geldig.
+            je je code meteen via WhatsApp, 7 dagen geldig.
           </p>
         </div>
 

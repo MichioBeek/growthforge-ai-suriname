@@ -54,8 +54,8 @@ export const WEBSITE_OFFER_WHATSAPP_LINK =
 export const HOME_ROUTE = '/'
 export const PAKKET_ROUTE = '/pakket'
 export const START_ROUTE = '/start'
-// $25 korting funnel switch: code + follow-ups go by e-mail (korting@omzetto.com via
-// Resend). Stays false until omzetto.com is verified in Resend. Flip to true + redeploy.
+// $25 korting funnel switch: code + follow-ups go by WhatsApp template (the
+// omzetto_korting_* ladder in the lead bot). false hides the popup + /korting form.
 export const KORTING_LIVE = true
 
 export const KORTING_ROUTE = '/korting'

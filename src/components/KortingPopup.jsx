@@ -118,8 +118,8 @@ export default function KortingPopup() {
             <span className="pb-1 font-serif text-[30px] italic leading-none sm:text-[34px]">korting</span>
           </h2>
           <p className="mt-4 max-w-[19rem] text-[15px] leading-relaxed text-[#c9d6cf] [@media(max-height:760px)]:mt-3 [@media(max-height:760px)]:text-[14px] [@media(max-height:760px)]:leading-snug">
-            Op je eerste website, WhatsApp-bot of boekingssysteem. Laat je e-mail achter, dan
-            krijg je je code meteen.
+            Op je eerste website, WhatsApp-bot of boekingssysteem. Laat je WhatsApp-nummer achter,
+            dan krijg je je code meteen.
           </p>
         </div>
 
@@ -132,7 +132,7 @@ export default function KortingPopup() {
           <KortingForm source="popup" />
           <ul className="mt-5 [@media(max-height:760px)]:mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1 text-[12px] text-platinum">
             <li className="flex items-center gap-1"><Check className="h-3.5 w-3.5 text-ion" aria-hidden="true" />Geen verplichting</li>
-            <li className="flex items-center gap-1"><Check className="h-3.5 w-3.5 text-ion" aria-hidden="true" />Afmelden kan altijd</li>
+            <li className="flex items-center gap-1"><Check className="h-3.5 w-3.5 text-ion" aria-hidden="true" />Stoppen kan altijd</li>
           </ul>
         </div>
       </div>

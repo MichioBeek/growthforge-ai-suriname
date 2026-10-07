@@ -1,17 +1,17 @@
 import { useState } from 'react'
-import { Mail, MessageCircle, Check, User, Building2, AtSign } from 'lucide-react'
+import { MessageCircle, Check, User, Building2, Phone } from 'lucide-react'
 import { buildWhatsAppLink, SIGNUP_API, KORTING_STORAGE_KEY } from '../constants.js'
 
 // The "$25 korting" sign-up form — used in the homepage popup and on /korting.
-// Posts to /api/signup (proxied to the lead bot, see netlify.toml), which mails
-// the code from korting@omzetto.com and starts the follow-up mails. On success the
-// visitor also gets a one-tap WhatsApp button with the code in it: tapping it opens
-// the chat and the bot recognises the code.
+// Posts to /api/signup (proxied to the lead bot, see netlify.toml), which sends the
+// code by WhatsApp template and starts the follow-up ladder. On success the visitor
+// also gets a one-tap WhatsApp button with the code in it: tapping it opens the chat
+// and the bot recognises the code.
 
 const ERRORS = {
-  email: 'Dit e-mailadres klopt niet. Check het nog even.',
+  phone: 'Dit WhatsApp-nummer klopt niet. Check het nog even.',
   fields: 'Vul je naam en de naam van je bedrijf in.',
-  consent: 'Vink het vakje aan, anders mogen we je de code niet mailen.',
+  consent: 'Vink het vakje aan, anders mogen we je de code niet sturen.',
   busy: 'Het is even heel druk. Probeer het over een paar minuten opnieuw.',
 }
 
@@ -23,7 +23,7 @@ function track(event, params) {
 export default function KortingForm({ source = 'popup', dark = false, businessPlaceholder = 'Naam van je bedrijf' }) {
   const [name, setName] = useState('')
   const [business, setBusiness] = useState('')
-  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
   const [consent, setConsent] = useState(false)
   const [hp, setHp] = useState('')
   const [state, setState] = useState('idle') // idle | sending | done | error
@@ -51,7 +51,7 @@ export default function KortingForm({ source = 'popup', dark = false, businessPl
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name, business, email, consent, hp,
+          name, business, phone, consent, hp,
           page: `${window.location.pathname}${window.location.search} (${source})`,
         }),
       })
@@ -81,14 +81,14 @@ export default function KortingForm({ source = 'popup', dark = false, businessPl
           <Check className="h-6 w-6" aria-hidden="true" />
         </span>
         <h3 className={`mt-4 font-sora text-[24px] font-bold tracking-[-0.02em] ${text}`}>
-          {result.already ? 'Je had al een code' : 'Check je mail'}
+          {result.already ? 'Je had al een code' : 'Check je WhatsApp'}
         </h3>
         <p className={`mt-2 text-[15px] leading-relaxed ${muted}`}>
           {result.expired
             ? `Je code ${result.code} was geldig tot en met ${result.expiresLabel}. App ons gerust, dan kijken we wat er nog kan.`
             : result.already
               ? `Je code is ${result.code} — geldig tot en met ${result.expiresLabel}.`
-              : `We hebben je code gemaild naar ${result.email || 'je e-mailadres'}. Niks gezien? Kijk ook even in je spam of promoties.`}
+              : 'We hebben je code via WhatsApp gestuurd. Hij staat hieronder ook.'}
         </p>
         <p className={`mx-auto mt-4 inline-block rounded-2xl border border-dashed px-5 py-2 font-mono text-[20px] font-bold tracking-[0.12em] ${dark ? 'border-plasma/50 text-plasma' : 'border-ion/50 text-ion'}`}>
           {result.code}
@@ -134,18 +134,18 @@ export default function KortingForm({ source = 'popup', dark = false, businessPl
           required
         />
       </div>
-      <label className="sr-only" htmlFor={`k-email-${source}`}>E-mailadres</label>
+      <label className="sr-only" htmlFor={`k-phone-${source}`}>WhatsApp-nummer</label>
       <div className="relative">
-        <AtSign className={icon} aria-hidden="true" />
+        <Phone className={icon} aria-hidden="true" />
         <input
-          id={`k-email-${source}`}
+          id={`k-phone-${source}`}
           className={field}
-          placeholder="Je e-mailadres"
-          type="email"
-          inputMode="email"
-          autoComplete="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Je WhatsApp-nummer"
+          type="tel"
+          inputMode="tel"
+          autoComplete="tel"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
           required
         />
       </div>
@@ -166,7 +166,7 @@ export default function KortingForm({ source = 'popup', dark = false, businessPl
           onChange={(e) => setConsent(e.target.checked)}
           className={`mt-0.5 h-4 w-4 shrink-0 ${dark ? 'accent-plasma' : 'accent-ion'}`}
         />
-        <span>Ja, Omzetto mag mij per e-mail berichten sturen over mijn korting, tips en aanbiedingen. Afmelden kan altijd.</span>
+        <span>Ja, Omzetto mag mij via WhatsApp berichten sturen over mijn korting, tips en aanbiedingen. Stoppen kan altijd met STOP.</span>
       </label>
       {state === 'error' && error && (
         <p role="alert" className={`text-[14px] font-medium ${dark ? 'text-plasma' : 'text-[#b4432e]'}`}>{error}</p>
@@ -176,8 +176,8 @@ export default function KortingForm({ source = 'popup', dark = false, businessPl
         disabled={state === 'sending'}
         className={`flex w-full items-center justify-center gap-2.5 rounded-full px-6 py-4 text-[16px] font-semibold transition-transform hover:scale-[1.02] disabled:opacity-60 [@media(max-height:760px)]:py-3 ${dark ? 'bg-plasma text-forest' : 'bg-ion text-white'}`}
       >
-        <Mail className="h-5 w-5" aria-hidden="true" />
-        {state === 'sending' ? 'Even geduld...' : 'Mail mij mijn code'}
+        <MessageCircle className="h-5 w-5" aria-hidden="true" />
+        {state === 'sending' ? 'Even geduld...' : 'Stuur mij mijn code'}
       </button>
     </form>
   )
