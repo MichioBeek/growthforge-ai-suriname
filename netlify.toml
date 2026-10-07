@@ -21,6 +21,34 @@
   status = 200
   force = true
 
+# "$25 korting" sign-ups go to the lead bot (growthforge-lead-bot), which owns
+# the WhatsApp number + templates. Proxied so the form posts same-origin.
+[[redirects]]
+  from = "/api/signup"
+  to = "https://growthforge-lead-bot.netlify.app/api/signup"
+  status = 200
+  force = true
+
+# Newsletter sign-ups from /korting ("ik kijk gewoon rond"), same lead bot.
+[[redirects]]
+  from = "/api/afmelden"
+  to = "https://growthforge-lead-bot.netlify.app/api/afmelden"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/newsletter"
+  to = "https://growthforge-lead-bot.netlify.app/api/newsletter"
+  status = 200
+  force = true
+
+# Visitor beacon for Omzetto HQ (live counter + website funnel), same lead bot.
+[[redirects]]
+  from = "/api/hit"
+  to = "https://growthforge-lead-bot.netlify.app/api/hit"
+  status = 200
+  force = true
+
 [[redirects]]
   from = "/*"
   to = "/index.html"

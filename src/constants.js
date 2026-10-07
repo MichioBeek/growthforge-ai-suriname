@@ -54,6 +54,20 @@ export const WEBSITE_OFFER_WHATSAPP_LINK =
 export const HOME_ROUTE = '/'
 export const PAKKET_ROUTE = '/pakket'
 export const START_ROUTE = '/start'
+// $25 korting funnel switch: code + follow-ups go by e-mail (korting@omzetto.com via
+// Resend). Stays false until omzetto.com is verified in Resend. Flip to true + redeploy.
+export const KORTING_LIVE = true
+
+export const KORTING_ROUTE = '/korting'
+
+// "$25 korting" sign-up funnel (Okt 2026). Same-origin path, proxied in
+// netlify.toml to the lead bot (growthforge-lead-bot), which sends the code by
+// WhatsApp template and runs the follow-up ladder. localStorage key remembers
+// "signed-up" or a snooze-until timestamp so the popup doesn't nag.
+export const SIGNUP_API = '/api/signup'
+// Newsletter for visitors who are just looking (same lead bot, see netlify.toml).
+export const NEWSLETTER_API = '/api/newsletter'
+export const KORTING_STORAGE_KEY = 'omzetto-korting'
 
 // Raw digits-only WhatsApp number (no +, no spaces) for wa.me links.
 const WHATSAPP_NUMBER_RAW = '5977422735'

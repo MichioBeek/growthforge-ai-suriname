@@ -1,10 +1,11 @@
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { MessageCircle, ArrowRight, Star } from 'lucide-react'
+import { MessageCircle, ArrowRight, Star, Gift } from 'lucide-react'
 import Logo from '../components/Logo.jsx'
 import Footer from '../components/Footer.jsx'
+import KortingPopup from '../components/KortingPopup.jsx'
 import { REVIEWS } from '../data/reviews.js'
-import { PAKKET_ROUTE, buildWhatsAppLink } from '../constants.js'
+import { PAKKET_ROUTE, KORTING_LIVE, buildWhatsAppLink } from '../constants.js'
 
 // Omzetto homepage (rebrand Okt 2026). Deliberately minimal: one scroll,
 // five beats — wie we zijn, wat we bouwen, hoe het werkt, bewijs, actie.
@@ -12,7 +13,7 @@ import { PAKKET_ROUTE, buildWhatsAppLink } from '../constants.js'
 // components (Features/Protocol/Philosophy/...) are intentionally unused here.
 
 const WA_LINK = buildWhatsAppLink(
-  'Hoi! Ik wil meer klanten binnenhalen met een website of systeem — kunnen we praten?'
+  'Hoi! Ik wil een website of systeem voor mijn bedrijf — kunnen we praten?'
 )
 
 // Reveals children (elements carrying .reveal) once the section scrolls into
@@ -39,40 +40,6 @@ function useReveal() {
     return () => io.disconnect()
   }, [])
   return ref
-}
-
-// Inline ring-arrow that replaces the "o" of "omzet" in the hero headline.
-// Sized/offset to sit on the text baseline like a letter.
-function RingO({ className }) {
-  return (
-    <svg
-      viewBox="0 0 72 70"
-      className={className}
-      aria-hidden="true"
-      style={{ display: 'inline-block', verticalAlign: 'baseline', marginBottom: '-0.02em' }}
-    >
-      <g transform="translate(5,8)">
-        <path
-          className="ring-draw"
-          pathLength="1"
-          d="M 30 2 A 27 27 0 1 0 56.5 33"
-          fill="none"
-          stroke="#0e7a55"
-          strokeWidth="10"
-          strokeLinecap="round"
-        />
-        <path
-          className="ring-arrow-pop"
-          d="M 45 8 L 61 2 L 58 19"
-          fill="none"
-          stroke="#0e7a55"
-          strokeWidth="10"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </g>
-    </svg>
-  )
 }
 
 function Nav() {
@@ -142,19 +109,16 @@ function Hero() {
         className="hero-enter mt-5 font-sora text-[52px] font-bold leading-[1.02] tracking-[-0.04em] text-ice sm:text-[72px] md:text-[92px]"
         style={{ '--d': '0.15s' }}
       >
-        Meer klanten.
+        Verlies geen
         <br />
-        <span className="whitespace-nowrap">
-          Meer <RingO className="h-[0.74em] w-auto" />
-          mzet.
-        </span>
+        klant meer.
       </h1>
       <p
         className="hero-enter mt-7 max-w-xl text-[18px] leading-relaxed text-platinum md:text-[20px]"
         style={{ '--d': '0.3s' }}
       >
-        Wij bouwen websites, WhatsApp-bots en boekingssystemen die klanten voor je
-        binnenhalen — terwijl jij gewoon doorwerkt. Voor ondernemers in Suriname.
+        Websites, WhatsApp-bots en boekingssystemen die elke klant opvangen — ook als
+        jij aan het werk bent of slaapt. Zo raak je niemand meer kwijt.
       </p>
       <div className="hero-enter mt-10 flex flex-wrap items-center gap-5" style={{ '--d': '0.45s' }}>
         <a
@@ -287,7 +251,7 @@ function VideoProof() {
   }
 
   return (
-    <section ref={ref} className="mx-auto max-w-5xl px-6 pb-24 md:pb-32">
+    <section ref={ref} id="bewijs" className="mx-auto max-w-5xl scroll-mt-6 px-6 pb-24 md:pb-32">
       <h2 className="reveal font-sora text-[32px] font-bold tracking-[-0.03em] text-ice md:text-[40px]">
         Zie het in actie
       </h2>
@@ -371,6 +335,38 @@ function Reviews() {
   )
 }
 
+// Always-visible way into the "$25 korting" sign-up, for visitors who closed
+// (or never saw) the popup. Opens the same popup via a window event.
+function KortingBand() {
+  const ref = useReveal()
+  return (
+    <section ref={ref} className="mx-auto max-w-5xl px-6 pb-16 md:pb-20">
+      <div className="reveal flex flex-col items-start gap-5 rounded-3xl border border-ion/25 bg-carbon p-7 sm:flex-row sm:items-center sm:justify-between md:p-9">
+        <div className="flex items-start gap-4">
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-ion text-white">
+            <Gift className="h-5 w-5" aria-hidden="true" />
+          </span>
+          <div>
+            <h2 className="font-sora text-[20px] font-bold tracking-[-0.02em] text-ice md:text-[22px]">
+              $25 korting op je eerste systeem
+            </h2>
+            <p className="mt-1 text-[15px] text-platinum">
+              Laat je e-mail achter, je code komt meteen in je mail.
+            </p>
+          </div>
+        </div>
+        <button
+          type="button"
+          onClick={() => window.dispatchEvent(new Event('open-korting'))}
+          className="shrink-0 rounded-full bg-ion px-6 py-3.5 text-[15px] font-semibold text-white transition-transform hover:scale-[1.03]"
+        >
+          Krijg mijn code
+        </button>
+      </div>
+    </section>
+  )
+}
+
 function CTABand() {
   const ref = useReveal()
   return (
@@ -415,8 +411,10 @@ export default function Home() {
       <Werkwijze />
       <VideoProof />
       <Reviews />
+      {KORTING_LIVE && <KortingBand />}
       <CTABand />
       <Footer />
+      {KORTING_LIVE && <KortingPopup />}
     </div>
   )
 }

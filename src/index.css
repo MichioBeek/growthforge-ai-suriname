@@ -226,3 +226,8 @@ html.hide-chat-widget #ai-chat-widget-host-6a5f953015299b7136a9aee8 {
   .reveal { opacity: 1; transform: none; transition: none; }
   .card-lift, .card-lift:hover { transform: none; transition: none; }
 }
+
+/* "$25 korting" popup entrance */
+.korting-pop { animation: korting-pop 0.35s cubic-bezier(0.25,0.46,0.45,0.94) both; }
+@keyframes korting-pop { from { opacity: 0; transform: translateY(16px) scale(0.98); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .korting-pop { animation: none; } }
