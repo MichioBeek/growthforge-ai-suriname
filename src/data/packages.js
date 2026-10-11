@@ -17,7 +17,7 @@
 // (pakketprijs = met Basic website; Medium +$250, Pro +$600); opzetkosten
 // and maandprijs always shown separately with their breakdown; hosting
 // $15/mnd standard on every website; bot monthly = volumetier (new clients
-// start on Rustig $75, tot ~300 gesprekken/mnd) + review AI $20; the bot
+// start on Rustig $30 since 2026-10-11, tot ~300 gesprekken/mnd) + review AI $20; the bot
 // niveau differs per niche (booking/creative/makelaar = niveau 3 boekingen,
 // restaurant = niveau 4 bestellingen → P2 $335→$485, P3 $475→$625).
 // Change prices HERE only after the Q4 SOP changes, never the other way.
@@ -68,13 +68,13 @@ const q4Cards = ({ botFeature, reviewFeature, p2Setup, p3Setup, extraP1Features 
     id: 'groei',
     name: 'Alles-in-één',
     setupPrice: p3Setup,
-    monthlyPrice: '$110/mnd',
+    monthlyPrice: '$65/mnd',
     tagline: 'Website, WhatsApp-bot en review AI in één systeem',
     features: [
       'Complete website — prijs is met Basic; Medium +$250, Pro +$600',
       botFeature,
       reviewFeature,
-      'Maandprijs: bot $75 (Rustig, tot ±300 gesprekken/mnd) + review AI $20 + hosting $15',
+      'Maandprijs: bot $30 (Rustig, tot ±300 gesprekken/mnd) + review AI $20 + hosting $15',
     ],
     highlight: true,
   },
@@ -82,12 +82,12 @@ const q4Cards = ({ botFeature, reviewFeature, p2Setup, p3Setup, extraP1Features 
     id: 'premium',
     name: 'WhatsApp-bot + Review AI',
     setupPrice: p2Setup,
-    monthlyPrice: '$95/mnd',
+    monthlyPrice: '$50/mnd',
     tagline: 'Al een website? Dan alleen de automatisering',
     features: [
       botFeature,
       reviewFeature,
-      'Maandprijs: bot $75 (Rustig, tot ±300 gesprekken/mnd) + review AI $20',
+      'Maandprijs: bot $30 (Rustig, tot ±300 gesprekken/mnd) + review AI $20',
     ],
     highlight: false,
   },
@@ -103,7 +103,7 @@ export const PACKAGE_TIERS_BY_CATEGORY = {
     reviewFeature: 'Google review AI — vraagt na elke afspraak automatisch om een review',
     p2Setup: '$335',
     p3Setup: '$475',
-    extraP1Features: ['Boekingskalender erbij? +$75 eenmalig + $30/mnd'],
+    extraP1Features: ['Boekingskalender erbij? +$75 eenmalig + $35/mnd'],
   }),
 
   // Fotografen/videografen: zelfde niveau 3 boekingsbot, maar dan voor
@@ -113,7 +113,7 @@ export const PACKAGE_TIERS_BY_CATEGORY = {
     reviewFeature: 'Google review AI — vraagt na elke levering automatisch om een review',
     p2Setup: '$335',
     p3Setup: '$475',
-    extraP1Features: ['Boekingskalender erbij? +$75 eenmalig + $30/mnd'],
+    extraP1Features: ['Boekingskalender erbij? +$75 eenmalig + $35/mnd'],
   }),
 
   // Makelaars: speed-to-lead is de grootste hefboom — niveau 3 bot reageert
